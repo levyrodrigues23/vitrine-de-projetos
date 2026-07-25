@@ -9,7 +9,7 @@ export function PortalEgressosPage() {
     <>
       <PageHero
         title="Portal de Egressos"
-        subtitle="Beneficios, histórias e canais para quem concluiu a graduação no campus."
+        subtitle="Benefícios, histórias e canais para quem concluiu a graduação no campus."
       />
       <Section title="| Sobre o portal" showSeparator={false}>
               <div className="flex md:flex-row flex-col bg-white p-4 rounded-2xl text-shadow-olive-200 shadow-2xl">
@@ -21,7 +21,7 @@ export function PortalEgressosPage() {
       
                 <img
                   src={Egress}
-                  alt="Icone de uma pessoa com um diploma, simbolizando os egressos do campus."
+                  alt="Ícone de uma pessoa com um diploma, simbolizando os egressos do campus."
                   className=" w-100 h-100 md:w-72 md:h-72 md:ml-6 "
                 />
               </div>

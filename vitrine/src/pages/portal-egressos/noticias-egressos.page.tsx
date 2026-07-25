@@ -10,14 +10,14 @@ export function NoticiasEgressosPage() {
       date: "Mar 2026",
     },
     {
-      title: "Projeto de egresso vira negocio local",
+      title: "Projeto de egresso vira negócio local",
       description:
-        "Solucao criada no campus se transforma em servico regional.",
+        "Solução criada no campus se transforma em serviço regional.",
       date: "Fev 2026",
     },
     {
-      title: "Egressa assume lideranca em empresa de tecnologia",
-      description: "Trajetoria profissional reconhecida em evento regional.",
+      title: "Egressa assume liderança em empresa de tecnologia",
+      description: "Trajetória profissional reconhecida em evento regional.",
       date: "Jan 2026",
     },
   ];
@@ -25,18 +25,18 @@ export function NoticiasEgressosPage() {
   return (
     <>
       <PageHero
-        title="Noticias dos Egressos"
-        subtitle="Destaques e noticias sobre atuacoes de egressos do campus."
+        title="Notícias dos Egressos"
+        subtitle="Destaques e notícias sobre atuações de egressos do campus."
       />
       <Section title="Destaques">
         <Text as="h2" variant="body-lg" className="text-center md:text-left">
-          Noticias pontuais sobre atuacoes cientificas, profissionais e projetos
-          realizados por egressos do Campus Itapaje.
+          Notícias pontuais sobre atuações científicas, profissionais e projetos
+          realizados por egressos do Campus Itapajé.
         </Text>
       </Section>
-      <Section title="Noticias recentes" showSeparator={false}>
+      <Section title="Notícias recentes" showSeparator={false}>
         <Text as="h2" variant="body-lg" className="text-center md:text-left">
-          Selecao de noticias e destaques recentes da comunidade de egressos.
+          Seleção de notícias e destaques recentes da comunidade de egressos.
         </Text>
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {news.map((item) => (

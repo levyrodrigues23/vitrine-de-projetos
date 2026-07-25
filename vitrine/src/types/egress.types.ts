@@ -2,10 +2,10 @@
 
 
 export const Curso = {
-    AnaliseeDesenvolvimentodeSistemas: "Analise e Desenvolvimento de Sistemas",
-    SegurançadaInformaçãoo: "Segurança da informação",
-    CienciadeDados: "Ciencia de Dados",
-    Teatro: "Teatro",
+  AnaliseeDesenvolvimentodeSistemas: "Análise e Desenvolvimento de Sistemas",
+  SegurançadaInformaçãoo: "Segurança da informação",
+  CienciadeDados: "Ciência de Dados",
+  Teatro: "Teatro",
 } as const;
 
 

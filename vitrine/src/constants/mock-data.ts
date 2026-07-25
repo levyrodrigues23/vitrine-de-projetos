@@ -12,7 +12,7 @@ export const MOCK_PROJECTS: Project[] = [
       {
         id: "wd1",
         title: "Sistema X",
-        description: "Descricao...",
+        description: "Descrição...",
         category: ProjectCategory.Pesquisa,
         imageUrl: "...",
       },

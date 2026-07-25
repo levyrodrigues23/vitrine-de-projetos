@@ -19,7 +19,7 @@ export function AgendaPage() {
       />
       <Section title="Atividades">
         <Text as="h2" variant="body-lg" className="text-center md:text-left">
-          Atividades academicas, oficinas, palestras e minicursos realizados no
+          Atividades acadêmicas, oficinas, palestras e minicursos realizados no
           campus e abertos para a comunidade.
         </Text>
         <ul className="mt-8 grid list-none gap-6 p-0 sm:grid-cols-2">
@@ -32,7 +32,7 @@ export function AgendaPage() {
       </Section>
       <Section title="Eventos" showSeparator={false}>
         <Text as="h2" variant="body-lg" className="text-center md:text-left">
-          Eventos especiais, competicoes e defesas com datas e locais definidos.
+          Eventos especiais, competições e defesas com datas e locais definidos.
         </Text>
         <ul className="mt-8 grid list-none gap-6 p-0 sm:grid-cols-2">
           {eventos.map((event) => (
