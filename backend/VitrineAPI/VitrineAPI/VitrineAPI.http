@@ -1,0 +1,215 @@
+@baseUrl = http://localhost:5026
+@projectId = 00000000-0000-0000-0000-000000000000
+@workDoneId = 00000000-0000-0000-0000-000000000000
+@teacherId = 3c9e9ecc-fff4-4757-a8fb-d3d57dc7be1b
+
+### Deletando um professor
+DELETE {{baseUrl}}/api/teachers/{{teacherId}}
+
+### Atualizando atributos de um professor
+PUT {{baseUrl}}/api/teachers/{{teacherId}}
+Content-Type: application/json
+{
+  "name": "Professor Teste",
+  "description": "Professor adjunto de teste",
+  "email": "professor@gmail.com",
+  "lattes": "https://lattes.cnpq.br/1234567890123456",
+  "field": "Engenharia de Dados",
+  "academicDegree": "Doutorado",
+  "imageUrl": "https://example.com/imagem.jpg"
+}
+
+### Buscando um professor por ID
+GET {{baseUrl}}/api/teachers/{{teacherId}}
+
+### Buscando todos os professores
+GET {{baseUrl}}/api/teachers
+
+### Criando professor
+POST {{baseUrl}}/api/teachers
+Content-Type: application/json
+{
+  "name": "Professor Teste",
+  "description": "Professor adjunto de teste",
+  "email": "professor@gmail.com",
+  "lattes": "https://lattes.cnpq.br/1234567890123456",
+  "field": "Engenharia de Software",
+  "academicDegree": "Pós_Doutorado",
+  "imageUrl": "https://example.com/imagem.jpg"
+}
+
+### Buscar workdone por ID
+GET {{baseUrl}}/api/worksdone/{{workDoneId}}
+
+### Atualizar workdone
+PUT {{baseUrl}}/api/projects/{{projectId}}/worksdone/{{workDoneId}}
+Content-Type: application/json
+
+{
+  "title": "Título atualizado",
+  "category": "Pesquisa",
+  "description": "Descrição atualizada",
+  "imageUrl": "https://example.com/imagem-atualizada.jpg"
+}
+
+### Atualizar workdone — título vazio (deve retornar 400)
+PUT {{baseUrl}}/api/projects/{{projectId}}/worksdone/{{workDoneId}}
+Content-Type: application/json
+
+{
+  "title": "",
+  "category": "Pesquisa",
+  "description": "Descrição válida",
+  "imageUrl": "https://example.com/imagem.jpg"
+}
+
+### Atualizar workdone inexistente (deve retornar 404)
+PUT {{baseUrl}}/api/projects/{{projectId}}/worksdone/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "title": "Título válido",
+  "category": "Pesquisa",
+  "description": "Descrição válida",
+  "imageUrl": "https://example.com/imagem.jpg"
+}
+
+###
+
+DELETE {{baseUrl}}/api/projects/{{projectId}}/worksdone/fdebfc77-9998-4f68-87cd-4b074b73f276
+
+###
+POST {{baseUrl}}/api/projects/{{projectId}}/worksdone
+content-type: application/json
+{
+  "title": "SafeCI 2",
+  "category": "Categoria teste",
+  "description": "Um projeto",
+  "imageUrl": "https://example.com/work-image.jpg"
+}
+
+###
+
+GET {{baseUrl}}/api/projects/{{projectId}}/worksdone
+
+### Criar projeto válido
+POST {{baseUrl}}/api/projects
+Content-Type: application/json
+
+{
+  "title": "Projeto de Extensão UFC",
+  "category": "Extensão",
+  "description": "Descrição do projeto de extensão da universidade",
+  "imageUrl": "https://example.com/image.jpg",
+  "worksDone": [
+    {
+      "title": "Devtutor",
+      "category": "Extensão - VSCode",
+      "description": "Uma extensão com propósito de ser um agente de IA educativo no ambiente de desenvolvimento",
+      "imageUrl": "https://example.com/work-image.jpg"
+    }
+  ]
+}
+
+###
+
+### Criar projeto — título vazio
+POST {{baseUrl}}/api/projects
+Content-Type: application/json
+
+{
+  "title": "",
+  "category": "Pesquisa",
+  "description": "Descrição válida",
+  "imageUrl": "https://example.com/image.jpg"
+}
+
+###
+
+### Criar projeto — categoria inválida
+POST {{baseUrl}}/api/projects
+Content-Type: application/json
+
+{
+  "title": "Projeto Teste",
+  "category": "CategoriaInexistente",
+  "description": "Descrição válida",
+  "imageUrl": "https://example.com/image.jpg"
+}
+
+###
+
+### Criar projeto — múltiplos campos inválidos
+POST {{baseUrl}}/api/projects
+Content-Type: application/json
+
+{
+  "title": "",
+  "category": "Inovação",
+  "description": "",
+  "imageUrl": ""
+}
+
+###
+
+### Listar todos os projetos
+GET {{baseUrl}}/api/projects
+
+###
+
+### Buscar projeto por ID — substitua pelo ID retornado no POST
+GET {{baseUrl}}/api/projects/{{projectId}}
+
+###
+
+### Buscar projeto — ID inexistente
+GET {{baseUrl}}/api/projects/00000000-0000-0000-0000-000000000001
+
+###
+
+### Atualizar projeto — substitua pelo ID retornado no POST
+PUT {{baseUrl}}/api/projects/{{projectId}}
+Content-Type: application/json
+
+{
+  "title": "Projeto Atualizado",
+  "category": "Pesquisa",
+  "description": "Descrição atualizada do projeto",
+  "imageUrl": "https://example.com/new-image.jpg"
+}
+
+###
+
+### Atualizar projeto — título muito longo (mais de 50 caracteres)
+PUT {{baseUrl}}/api/projects/{{projectId}}
+Content-Type: application/json
+
+{
+  "title": "Este título é extremamente longo e vai ultrapassar o limite de cinquenta caracteres permitidos",
+  "category": "Inovação",
+  "description": "Descrição válida",
+  "imageUrl": "https://example.com/image.jpg"
+}
+
+###
+
+### Atualizar projeto — ID inexistente
+PUT {{baseUrl}}/api/projects/00000000-0000-0000-0000-000000000001
+Content-Type: application/json
+
+{
+  "title": "Projeto Teste",
+  "category": "Extensão",
+  "description": "Descrição válida",
+  "imageUrl": "https://example.com/image.jpg"
+}
+
+###
+
+### Deletar projeto — substitua pelo ID retornado no POST
+DELETE {{baseUrl}}/api/projects/{{projectId}}
+
+###
+
+### Deletar projeto — ID inexistente
+DELETE {{baseUrl}}/api/projects/00000000-0000-0000-0000-000000000001
