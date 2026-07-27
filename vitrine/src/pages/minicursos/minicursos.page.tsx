@@ -24,7 +24,7 @@ export function MinicursosPage() {
     <>
       <PageHero
         title="Minicursos"
-        subtitle="Cursos de curta duracao para publico interno e externo do campus."
+        subtitle="Cursos de curta duração para público interno e externo do campus."
       />
       <Section title="Sobre os minicursos" align="center">
         <div className="flex flex-col items-center rounded-2xl bg-white p-6 shadow-2xl md:flex-row md:items-start md:p-8">
@@ -48,7 +48,7 @@ export function MinicursosPage() {
       </Section>
       <Section
         title="Filtrar por tipo"
-        description="Escolha o tipo de publico para visualizar os minicursos disponiveis."
+        description="Escolha o tipo de público para visualizar os minicursos disponíveis."
         showSeparator={false}
         align="center"
       >
@@ -71,7 +71,7 @@ export function MinicursosPage() {
               size: "md",
             })}
           >
-            Publico interno
+            Público interno
           </button>
           <button
             type="button"
@@ -81,7 +81,7 @@ export function MinicursosPage() {
               size: "md",
             })}
           >
-            Publico externo
+            Público externo
           </button>
         </div>
 
