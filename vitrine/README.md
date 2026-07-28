@@ -1,5 +1,7 @@
-# 🚀 Vitrine de Projetos - UFC Itapajé
+# Frontend - Vitrine de Projetos
 
-Uma plataforma moderna desenvolvida para dar visibilidade aos projetos e talentos do campus da UFC em Itapajé.
+A documentação principal do projeto está no README da raiz do repositório:
 
+- [../README.md](../README.md)
 
+Este diretório contém a aplicação frontend em React, TypeScript e Vite.
