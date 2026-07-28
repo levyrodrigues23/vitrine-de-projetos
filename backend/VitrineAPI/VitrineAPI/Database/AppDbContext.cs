@@ -12,5 +12,6 @@ namespace VitrineAPI.Database
         public DbSet<Project> Projects { get; set; } = null!;
         public DbSet<WorkDone> WorksDone { get; set; } = null!;
         public DbSet<Teacher> Teachers { get; set; } = null!;
+        public DbSet<MiniCourse> MiniCourses { get; set; } = null!;
     }
 }
