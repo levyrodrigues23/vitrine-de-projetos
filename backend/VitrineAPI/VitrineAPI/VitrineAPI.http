@@ -2,6 +2,20 @@
 @projectId = 00000000-0000-0000-0000-000000000000
 @workDoneId = 00000000-0000-0000-0000-000000000000
 @teacherId = 3c9e9ecc-fff4-4757-a8fb-d3d57dc7be1b
+@miniCourseId = 02f9048f-3d68-4a1e-aeee-5a4875bb0fc3
+
+### Pegando um mini curso por id
+GET {{baseUrl}}/api/minicourses/{{miniCourseId}}
+
+### Criando um mini curso
+POST {{baseUrl}}/api/minicourses
+Content-Type: application/json
+{
+  "title": "Inteligência artificial 101",
+  "description": "um curso sobre os fundamentos de inteligência artificial",
+  "organizers": "pedro, joão, maria",
+  "targetAudience": "Interno"
+}
 
 ### Deletando um professor
 DELETE {{baseUrl}}/api/teachers/{{teacherId}}
