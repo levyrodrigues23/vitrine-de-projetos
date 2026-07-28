@@ -2,6 +2,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using VitrineAPI.Database;
+using VitrineAPI.Features.MiniCourses.Endpoints;
 using VitrineAPI.Features.Projects.Endpoints;
 using VitrineAPI.Features.Teachers.Endpoints;
 using VitrineAPI.Features.WorksDone.Endpoints;
@@ -64,6 +65,10 @@ namespace VitrineAPI
             builder.Services.AddScoped<GetTeacherByIdHandler>();
             builder.Services.AddScoped<UpdateTeacherHandler>();
             builder.Services.AddScoped<DeleteTeacherHandler>();
+
+            // MiniCourses handlers
+            builder.Services.AddScoped<CreateMiniCourseHandler>();
+            builder.Services.AddScoped<GetMiniCourseByIdHandler>();
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
