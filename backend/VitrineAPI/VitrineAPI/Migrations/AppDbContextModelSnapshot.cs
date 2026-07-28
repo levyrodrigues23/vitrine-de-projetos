@@ -22,6 +22,32 @@ namespace VitrineAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("VitrineAPI.Database.Models.MiniCourse", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Organizers")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("TargetAudience")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MiniCourses");
+                });
+
             modelBuilder.Entity("VitrineAPI.Database.Models.Project", b =>
                 {
                     b.Property<Guid>("Id")
