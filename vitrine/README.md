@@ -1,7 +1,10 @@
-# Frontend - Vitrine de Projetos
+# Frontend
 
-A documentação principal do projeto está no README da raiz do repositório:
+React app for the Vitrine de Projetos public site and admin area.
+
+See the repository documentation:
 
 - [../README.md](../README.md)
-
-Este diretório contém a aplicação frontend em React, TypeScript e Vite.
+- [../docs/web-app.md](../docs/web-app.md)
+- [../docs/admin-app.md](../docs/admin-app.md)
+- [../docs/styling.md](../docs/styling.md)
