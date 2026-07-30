@@ -4,6 +4,48 @@
 @teacherId = 3c9e9ecc-fff4-4757-a8fb-d3d57dc7be1b
 @miniCourseId = 02f9048f-3d68-4a1e-aeee-5a4875bb0fc3
 
+### Atualizando um mini curso
+PUT {{baseUrl}}/api/minicourses/{{miniCourseId}}
+Content-Type: application/json
+
+{
+  "title": "Inteligência artificial 101 - Atualizado",
+  "description": "um curso atualizado sobre os fundamentos de inteligência artificial",
+  "organizers": "pedro, joão, maria, ana",
+  "targetAudience": "Externo"
+}
+
+### Atualizando um mini curso inexistente (deve retornar 404)
+PUT {{baseUrl}}/api/minicourses/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "title": "Curso fantasma",
+  "description": "esse curso não existe",
+  "organizers": "ninguém",
+  "targetAudience": "Interno"
+}
+
+### Atualizando um mini curso com dados inválidos (deve retornar 400)
+PUT {{baseUrl}}/api/minicourses/{{miniCourseId}}
+Content-Type: application/json
+
+{
+  "title": "",
+  "description": "",
+  "organizers": "",
+  "targetAudience": "ValorInvalido"
+}
+
+### Deletando um mini curso
+DELETE {{baseUrl}}/api/minicourses/{{miniCourseId}}
+
+### Deletando um mini curso inexistente (deve retornar 404)
+DELETE {{baseUrl}}/api/minicourses/00000000-0000-0000-0000-000000000000
+
+### Pegando todos os mini cursos
+GET {{baseUrl}}/api/minicourses
+
 ### Pegando um mini curso por id
 GET {{baseUrl}}/api/minicourses/{{miniCourseId}}
 

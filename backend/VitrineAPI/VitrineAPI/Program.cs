@@ -46,8 +46,8 @@ namespace VitrineAPI
             
             // Projects handlers
             builder.Services.AddScoped<CreateProjectHandler>();
-            builder.Services.AddScoped<GetProjectsHandler>();
             builder.Services.AddScoped<GetProjectByIdHandler>();
+            builder.Services.AddScoped<GetProjectsHandler>();
             builder.Services.AddScoped<UpdateProjectHandler>();
             builder.Services.AddScoped<DeleteProjectHandler>();
 
@@ -58,17 +58,19 @@ namespace VitrineAPI
             builder.Services.AddScoped<UpdateWorkDoneHandler>();
             builder.Services.AddScoped<DeleteWorkDoneHandler>();
             
-
             // Teachers handlers
             builder.Services.AddScoped<CreateTeacherHandler>();
-            builder.Services.AddScoped<GetTeachersHandler>();
             builder.Services.AddScoped<GetTeacherByIdHandler>();
+            builder.Services.AddScoped<GetTeachersHandler>();
             builder.Services.AddScoped<UpdateTeacherHandler>();
             builder.Services.AddScoped<DeleteTeacherHandler>();
 
             // MiniCourses handlers
             builder.Services.AddScoped<CreateMiniCourseHandler>();
             builder.Services.AddScoped<GetMiniCourseByIdHandler>();
+            builder.Services.AddScoped<GetMiniCoursesHandler>();
+            builder.Services.AddScoped<UpdateMiniCourseHandler>();
+            builder.Services.AddScoped<DeleteMiniCourseHandler>();
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
