@@ -6,6 +6,7 @@ using VitrineAPI.Features.MiniCourses.Endpoints;
 using VitrineAPI.Features.Projects.Endpoints;
 using VitrineAPI.Features.Teachers.Endpoints;
 using VitrineAPI.Features.WorksDone.Endpoints;
+using VitrineAPI.Features.Startups.Endpoints;
 
 namespace VitrineAPI
 {
@@ -71,6 +72,13 @@ namespace VitrineAPI
             builder.Services.AddScoped<GetMiniCoursesHandler>();
             builder.Services.AddScoped<UpdateMiniCourseHandler>();
             builder.Services.AddScoped<DeleteMiniCourseHandler>();
+
+            // Startups handlers
+            builder.Services.AddScoped<CreateStartupHandler>();
+            //builder.Services.AddScoped<GetStartupByIdHandler>();
+            builder.Services.AddScoped<GetStartupsHandler>();
+            //builder.Services.AddScoped<UpdateStartupHandler>();
+            //builder.Services.AddScoped<DeleteStartupHandler>();
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 

@@ -4,6 +4,20 @@
 @teacherId = 3c9e9ecc-fff4-4757-a8fb-d3d57dc7be1b
 @miniCourseId = 02f9048f-3d68-4a1e-aeee-5a4875bb0fc3
 
+### Pegando todas as startups
+GET {{baseUrl}}/api/startups
+
+### Criando uma startup
+POST {{baseUrl}}/api/startups
+Content-Type: application/json
+{
+  "title": "Startup Teste 2",
+  "description": "Descrição da startup de teste 2",
+  "imageUrl": "https://example.com/image.jpg",
+  "category": "E-commerce",
+  "contact": "https://example.com/contact"
+}
+
 ### Atualizando um mini curso
 PUT {{baseUrl}}/api/minicourses/{{miniCourseId}}
 Content-Type: application/json

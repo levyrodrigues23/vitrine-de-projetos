@@ -79,6 +79,37 @@ namespace VitrineAPI.Migrations
                     b.ToTable("Projects");
                 });
 
+            modelBuilder.Entity("VitrineAPI.Database.Models.Startup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Contact")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Startup");
+                });
+
             modelBuilder.Entity("VitrineAPI.Database.Models.Teacher", b =>
                 {
                     b.Property<Guid>("Id")
