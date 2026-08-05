@@ -75,10 +75,10 @@ namespace VitrineAPI
 
             // Startups handlers
             builder.Services.AddScoped<CreateStartupHandler>();
-            //builder.Services.AddScoped<GetStartupByIdHandler>();
+            builder.Services.AddScoped<GetStartupByIdHandler>();
             builder.Services.AddScoped<GetStartupsHandler>();
-            //builder.Services.AddScoped<UpdateStartupHandler>();
-            //builder.Services.AddScoped<DeleteStartupHandler>();
+            builder.Services.AddScoped<UpdateStartupHandler>();
+            builder.Services.AddScoped<DeleteStartupHandler>();
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
