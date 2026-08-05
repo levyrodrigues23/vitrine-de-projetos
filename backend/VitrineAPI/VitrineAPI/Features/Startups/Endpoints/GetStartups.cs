@@ -9,7 +9,7 @@ namespace VitrineAPI.Features.Startups.Endpoints
     {
         public async Task<List<StartupResponse>> Handle()
         {
-            return await db.Startup
+            return await db.Startups
                 .Select(p => new StartupResponse(
                     p.Id,
                     p.Title,

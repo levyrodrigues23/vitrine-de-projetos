@@ -13,6 +13,6 @@ namespace VitrineAPI.Database
         public DbSet<WorkDone> WorksDone { get; set; } = null!;
         public DbSet<Teacher> Teachers { get; set; } = null!;
         public DbSet<MiniCourse> MiniCourses { get; set; } = null!;
-        public DbSet<Startup> Startup { get; set; } = null!;
+        public DbSet<Startup> Startups { get; set; } = null!;
     }
 }

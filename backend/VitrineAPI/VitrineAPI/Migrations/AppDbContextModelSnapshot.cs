@@ -107,7 +107,7 @@ namespace VitrineAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Startup");
+                    b.ToTable("Startups");
                 });
 
             modelBuilder.Entity("VitrineAPI.Database.Models.Teacher", b =>
