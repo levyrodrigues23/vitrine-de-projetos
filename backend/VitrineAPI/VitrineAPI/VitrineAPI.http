@@ -4,6 +4,77 @@
 @teacherId = 3c9e9ecc-fff4-4757-a8fb-d3d57dc7be1b
 @miniCourseId = 02f9048f-3d68-4a1e-aeee-5a4875bb0fc3
 @startupId = e9d96353-f35d-404d-b2b9-093db8b7bc98
+@congressId = 7563445a-6c1b-494b-bd83-40cb932eda82
+
+### Cria um Congresso
+POST {{baseUrl}}/api/congresses
+Content-Type: application/json
+
+{
+  "title": "Congresso Brasileiro de Inovação Tecnológica 2",
+  "description": "Evento anual reunindo pesquisadores e empresas do setor de tecnologia.",
+  "date": "2026-10-15",
+  "url": "https://congressoinovacao.com.br",
+  "location": "Fortaleza, CE",
+  "status": "A_ser_publicado"
+}
+
+### Pegando congresso por id (deve retornar 200 OK se congressId válido)
+GET {{baseUrl}}/api/congresses/{{congressId}}
+Accept: application/json
+
+### Listando todos os congressos (deve retornar 200 OK)
+GET {{baseUrl}}/api/congresses
+Accept: application/json
+
+### Atualizando um congresso (deve retornar 200 OK se congressId válido)
+PUT {{baseUrl}}/api/congresses/{{congressId}}
+Content-Type: application/json
+
+{
+  "title": "Congresso Brasileiro de Inovação Tecnológica 2026",
+  "description": "Evento anual reunindo pesquisadores, startups e empresas do setor de tecnologia.",
+  "date": "2026-10-20",
+  "url": "https://congressoinovacao.com.br",
+  "location": "Fortaleza, CE",
+  "status": "Em_andamento"
+}
+
+### Deletando um congresso (deve retornar 204 No Content se congressId válido)
+DELETE {{baseUrl}}/api/congresses/{{congressId}}
+
+### Criando congresso com status inválido (deve retornar 400 Bad Request)
+POST {{baseUrl}}/api/congresses
+Content-Type: application/json
+
+{
+  "title": "Congresso Teste",
+  "description": "Teste de validação",
+  "date": "2026-10-15",
+  "url": "https://teste.com.br",
+  "location": "Fortaleza, CE",
+  "status": "Cancelado"
+}
+
+### Criando congresso com campos vazios (deve retornar 400 Bad Request)
+POST {{baseUrl}}/api/congresses
+Content-Type: application/json
+
+{
+  "title": "",
+  "description": "",
+  "date": "",
+  "url": "",
+  "location": "",
+  "status": ""
+}
+
+### Pegando congresso por id inexistente (deve retornar 404 Not Found)
+GET {{baseUrl}}/api/congresses/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+### Deletando congresso inexistente (deve retornar 404 Not Found)
+DELETE {{baseUrl}}/api/congresses/00000000-0000-0000-0000-000000000000
 
 ### Cria uma Startup
 POST {{baseUrl}}/api/startups

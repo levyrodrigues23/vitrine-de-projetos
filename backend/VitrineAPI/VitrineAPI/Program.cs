@@ -7,6 +7,7 @@ using VitrineAPI.Features.Projects.Endpoints;
 using VitrineAPI.Features.Teachers.Endpoints;
 using VitrineAPI.Features.WorksDone.Endpoints;
 using VitrineAPI.Features.Startups.Endpoints;
+using VitrineAPI.Features.Congresses.Endpoints;
 
 namespace VitrineAPI
 {
@@ -79,6 +80,13 @@ namespace VitrineAPI
             builder.Services.AddScoped<GetStartupsHandler>();
             builder.Services.AddScoped<UpdateStartupHandler>();
             builder.Services.AddScoped<DeleteStartupHandler>();
+
+            // Congresses handlers
+            builder.Services.AddScoped<CreateCongressHandler>();
+            builder.Services.AddScoped<GetCongressByIdHandler>();
+            builder.Services.AddScoped<GetCongressesHandler>();
+            builder.Services.AddScoped<UpdateCongressHandler>();
+            builder.Services.AddScoped<DeleteCongressHandler>();
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
