@@ -82,6 +82,49 @@ namespace VitrineAPI.Migrations
                     b.ToTable("MiniCourses");
                 });
 
+            modelBuilder.Entity("VitrineAPI.Database.Models.Paper", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Authors")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Base")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("CongressId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Keywords")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("YearOfPublication")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CongressId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Papers");
+                });
+
             modelBuilder.Entity("VitrineAPI.Database.Models.Project", b =>
                 {
                     b.Property<Guid>("Id")
@@ -217,6 +260,25 @@ namespace VitrineAPI.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("WorksDone");
+                });
+
+            modelBuilder.Entity("VitrineAPI.Database.Models.Paper", b =>
+                {
+                    b.HasOne("VitrineAPI.Database.Models.Congress", "Congress")
+                        .WithMany()
+                        .HasForeignKey("CongressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VitrineAPI.Database.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Congress");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("VitrineAPI.Database.Models.Project", b =>

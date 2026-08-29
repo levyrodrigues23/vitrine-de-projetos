@@ -15,5 +15,6 @@ namespace VitrineAPI.Database
         public DbSet<MiniCourse> MiniCourses { get; set; } = null!;
         public DbSet<Startup> Startups { get; set; } = null!;
         public DbSet<Congress> Congresses { get; set; } = null!;
+        public DbSet<Paper> Papers { get; set; } = null!;
     }
 }
