@@ -3,9 +3,9 @@ import Carousel from "../../ui/carousel/carousel";
 import Separator from "../separator/separator";
 import HomeIcon from "../../../assets/icons/home-icon.svg?react";
 import TypeIt from "typeit-react";
-import { useEffect, useMemo, useRef, useState } from "react";
-import Fuse from "fuse.js";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useProjectSearchSuggestions } from "../../../hooks/search";
 import type { Project } from "../../../types/project.types";
 
 interface HeroProps {
@@ -56,36 +56,14 @@ export default function Hero({
 
   const inputValue = searchValue !== undefined ? searchValue : internalValue;
 
-  
-  const fuse = useMemo(() => {
-    const options: Fuse.IFuseOptions<Project> = {
-      keys: ["title", "description"],
-      threshold: 0.4,
-    };
-    return new Fuse(searchItems, options);
-  }, [searchItems]);
-
-  const [suggestions, setSuggestions] = useState<Project[]>([]);
-  const debounceRef = useRef<number | null>(null);
-
-  const getSearchResults = (q: string, limit = 6): Project[] => {
-    const trimmed = q.trim();
-    if (!trimmed) return [];
-    return (
-      fuse.search(trimmed, { limit }) as Fuse.FuseResult<Project>[]
-    ).map((r) => r.item);
-  };
+  const { suggestions, search } = useProjectSearchSuggestions(searchItems, inputValue);
 
   const handleChange = (v: string) => {
     if (searchValue === undefined) setInternalValue(v);
     onSearchChange?.(v);
-
-    if (debounceRef.current) window.clearTimeout(debounceRef.current);
-    debounceRef.current = window.setTimeout(() => setSuggestions(getSearchResults(v)), 250);
   };
 
   const handleSelect = (id: string) => {
-    setSuggestions([]);
     if (searchValue === undefined) setInternalValue("");
     navigate(`/projetos/${id}`);
   };
@@ -94,12 +72,10 @@ export default function Hero({
     const trimmed = rawValue.trim();
     if (!trimmed) return;
 
-    if (searchItems.length > 0) {
-      const [bestMatch] = getSearchResults(trimmed, 1);
-      if (bestMatch) {
-        handleSelect(bestMatch.id);
-        return;
-      }
+    const [bestMatch] = search(trimmed, 1);
+    if (bestMatch) {
+      handleSelect(bestMatch.id);
+      return;
     }
 
     if (onSearchSubmit) {

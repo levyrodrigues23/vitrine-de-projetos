@@ -1,8 +1,13 @@
-import { NavLink } from "react-router";
-import { useEffect, useState } from "react";
+import { NavLink, useNavigate } from "react-router";
+import { useEffect, useRef, useState } from "react";
+import type { FormEvent } from "react";
 import Menu from "../../../assets/icons/menu.svg?react";
 import Arrowright from "../../../assets/icons/caret-right.svg?react";
 import { Icon, Input } from "../../ui";
+import { MagnifyingGlass } from "@phosphor-icons/react";
+import { useProjects } from "../../../hooks/project";
+import { useProjectSearchSuggestions } from "../../../hooks/search";
+import type { Project } from "../../../types/project.types";
 
 type NavIcon =
   | React.ComponentType<React.SVGProps<SVGSVGElement>>
@@ -23,6 +28,52 @@ export interface MenuResponsiveProps {
   logoAlt?: string;
 }
 
+function SearchSuggestionsList({
+  projects,
+  onSelect,
+  variant,
+}: {
+  projects: Project[];
+  onSelect: (id: string) => void;
+  variant: "light" | "dark";
+}) {
+  if (projects.length === 0) return null;
+
+  return (
+    <ul
+      className={`mt-2 max-h-72 space-y-1 overflow-y-auto rounded-md ${
+        variant === "light" ? "bg-white" : "bg-white/5"
+      }`}
+    >
+      {projects.map((project) => (
+        <li key={project.id}>
+          <button
+            type="button"
+            onMouseDown={(event) => event.preventDefault()}
+            onClick={() => onSelect(project.id)}
+            className={`block w-full rounded-md px-3 py-2 text-left text-sm transition-colors ${
+              variant === "light"
+                ? "text-black hover:bg-gray-100"
+                : "text-white/90 hover:bg-white/10"
+            }`}
+          >
+            <span className="block font-semibold">{project.title}</span>
+            {project.description && (
+              <span
+                className={`block truncate text-xs ${
+                  variant === "light" ? "text-gray-base" : "text-white/60"
+                }`}
+              >
+                {project.description}
+              </span>
+            )}
+          </button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function MenuResponsive({
   headerNavLinks,
   menuNavLinks = headerNavLinks,
@@ -31,6 +82,18 @@ export default function MenuResponsive({
 }: MenuResponsiveProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDesktopSearchOpen, setIsDesktopSearchOpen] = useState(false);
+  const [desktopQuery, setDesktopQuery] = useState("");
+  const [mobileQuery, setMobileQuery] = useState("");
+
+  const navigate = useNavigate();
+  const { projects } = useProjects();
+  const { suggestions: desktopSuggestions, search: searchDesktop } =
+    useProjectSearchSuggestions(projects, desktopQuery);
+  const { suggestions: mobileSuggestions, search: searchMobile } =
+    useProjectSearchSuggestions(projects, mobileQuery);
+
+  const desktopSearchRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     function handleScroll() {
@@ -39,6 +102,56 @@ export default function MenuResponsive({
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isDesktopSearchOpen) return;
+
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        desktopSearchRef.current &&
+        !desktopSearchRef.current.contains(event.target as Node)
+      ) {
+        setIsDesktopSearchOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isDesktopSearchOpen]);
+
+  function goToProject(id: string) {
+    navigate(`/projetos/${id}`);
+  }
+
+  function searchOrNavigate(
+    query: string,
+    findBestMatch: (value: string, limit?: number) => Project[],
+  ) {
+    const trimmed = query.trim();
+    if (!trimmed) return;
+
+    const [bestMatch] = findBestMatch(trimmed, 1);
+    if (bestMatch) {
+      goToProject(bestMatch.id);
+      return;
+    }
+
+    navigate(`/projetos?busca=${encodeURIComponent(trimmed)}`);
+  }
+
+  function handleDesktopSubmit(event: FormEvent) {
+    event.preventDefault();
+    searchOrNavigate(desktopQuery, searchDesktop);
+    setDesktopQuery("");
+    setIsDesktopSearchOpen(false);
+  }
+
+  function handleMobileSubmit(event: FormEvent) {
+    event.preventDefault();
+    searchOrNavigate(mobileQuery, searchMobile);
+    setMobileQuery("");
+    setIsMenuOpen(false);
+  }
 
   return (
     <>
@@ -74,6 +187,48 @@ export default function MenuResponsive({
               </NavLink>
             ))}
           </nav>
+
+          <div ref={desktopSearchRef} className="relative hidden shrink-0 md:block">
+            <button
+              type="button"
+              onClick={() => setIsDesktopSearchOpen((open) => !open)}
+              aria-expanded={isDesktopSearchOpen}
+              aria-label={isDesktopSearchOpen ? "Fechar busca" : "Buscar projetos"}
+              className="flex h-9 w-9 items-center justify-center rounded-full text-white/75 transition-colors duration-200 hover:bg-white/10 hover:text-white"
+            >
+              <MagnifyingGlass className="h-5 w-5" />
+            </button>
+
+            {isDesktopSearchOpen && (
+              <div className="absolute right-0 top-full z-50 mt-2 w-80 rounded-lg bg-white p-3 shadow-xl ring-1 ring-black/5">
+                <form onSubmit={handleDesktopSubmit}>
+                  <Input
+                    autoFocus
+                    type="search"
+                    value={desktopQuery}
+                    onChange={(event) => setDesktopQuery(event.target.value)}
+                    placeholder="Buscar projetos..."
+                    aria-label="Buscar projetos"
+                    aria-autocomplete="list"
+                    aria-controls="desktop-search-suggestions"
+                    autoComplete="off"
+                  />
+                </form>
+
+                <div id="desktop-search-suggestions">
+                  <SearchSuggestionsList
+                    projects={desktopSuggestions}
+                    variant="light"
+                    onSelect={(id) => {
+                      goToProject(id);
+                      setDesktopQuery("");
+                      setIsDesktopSearchOpen(false);
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
 
           <button
             type="button"
@@ -121,11 +276,31 @@ export default function MenuResponsive({
         </div>
 
         <div className="border-b border-white/10 px-6 py-4">
-          <Input
-            type="search"
-            placeholder="Buscar projetos..."
-            className="w-full bg-white/10 text-white placeholder:text-white/60 border-white/20 focus-visible:ring-white/50"
-          />
+          <form onSubmit={handleMobileSubmit}>
+            <Input
+              type="search"
+              value={mobileQuery}
+              onChange={(event) => setMobileQuery(event.target.value)}
+              placeholder="Buscar projetos..."
+              aria-label="Buscar projetos"
+              aria-autocomplete="list"
+              aria-controls="mobile-search-suggestions"
+              autoComplete="off"
+              className="w-full bg-white/10 text-white placeholder:text-white/60 border-white/20 focus-visible:ring-white/50"
+            />
+          </form>
+
+          <div id="mobile-search-suggestions">
+            <SearchSuggestionsList
+              projects={mobileSuggestions}
+              variant="dark"
+              onSelect={(id) => {
+                goToProject(id);
+                setMobileQuery("");
+                setIsMenuOpen(false);
+              }}
+            />
+          </div>
         </div>
 
         {menuNavLinks.map(({ label, to, icon: IconSvg }) => (
