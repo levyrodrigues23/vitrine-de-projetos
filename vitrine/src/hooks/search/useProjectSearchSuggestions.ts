@@ -41,22 +41,18 @@ export function useProjectSearchSuggestions(
     );
   };
 
-  const [suggestions, setSuggestions] = useState<Project[]>([]);
+  const [debouncedQuery, setDebouncedQuery] = useState(query);
 
   useEffect(() => {
-    const trimmed = query.trim();
-    if (!trimmed) {
-      setSuggestions([]);
-      return;
-    }
-
-    const timeoutId = window.setTimeout(() => {
-      setSuggestions(search(query, limit));
-    }, debounceMs);
-
+    const timeoutId = window.setTimeout(() => setDebouncedQuery(query), debounceMs);
     return () => window.clearTimeout(timeoutId);
+  }, [query, debounceMs]);
+
+  const suggestions = useMemo(
+    () => search(debouncedQuery, limit),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, fuse, limit, debounceMs]);
+    [debouncedQuery, fuse, limit],
+  );
 
   return { suggestions, search };
 }
