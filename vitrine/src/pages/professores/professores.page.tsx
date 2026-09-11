@@ -1,36 +1,16 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { Section } from "../../components/ui";
 import { TeacherCard, AreaCard } from "../../components/features";
-import { useTeachers, useTeacherAreas } from "../../hooks/teacher";
+import { useTeachers } from "../../hooks/teacher";
 import { useSeo } from "../../hooks/seo";
-import {
-  Code2,
-  BarChart3,
-  Brain,
-  Globe,
-  Database,
-  Gamepad2,
-  Shield,
-  Network,
-  Building2,
-} from "lucide-react";
+import { GraduationCap } from "lucide-react";
 
-const getIcon = (iconName: string) => {
-  const icons: Record<string, any> = {
-    Code2,
-    BarChart3,
-    Brain,
-    Globe,
-    Database,
-    Gamepad2,
-    Shield,
-    Network,
-    Building2,
-  };
-
-  return icons[iconName] || Code2;
-};
+interface TeacherAreaSummary {
+  id: string;
+  name: string;
+  count: number;
+}
 
 export function ProfessoresPage() {
   useSeo({
@@ -40,25 +20,26 @@ export function ProfessoresPage() {
   });
 
   const { teachers, loading, error } = useTeachers();
-  const { areas, loading: areasLoading } = useTeacherAreas();
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
 
-  const getFilteredTeachers = () => {
-    if (!selectedArea) return teachers;
+  const areas = useMemo<TeacherAreaSummary[]>(() => {
+    const counts = new Map<string, number>();
+    teachers.forEach((teacher) => {
+      if (!teacher.area) return;
+      counts.set(teacher.area, (counts.get(teacher.area) ?? 0) + 1);
+    });
 
-    const area = areas.find((a) => a.id === selectedArea);
+    return Array.from(counts.entries())
+      .map(([name, count]) => ({ id: name, name, count }))
+      .sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
+  }, [teachers]);
 
-    if (!area) return teachers;
-
-    return teachers.filter(
-      (teacher) => teacher.area === area.name
-    );
-  };
-
-  const filteredTeachers = getFilteredTeachers();
+  const filteredTeachers = selectedArea
+    ? teachers.filter((teacher) => teacher.area === selectedArea)
+    : teachers;
 
   const handleAreaToggle = (areaId: string) => {
-    setSelectedArea(selectedArea === areaId ? null : areaId);
+    setSelectedArea((current) => (current === areaId ? null : areaId));
   };
 
   return (
@@ -99,13 +80,13 @@ export function ProfessoresPage() {
           </div>
         )}
       </Section>
-      
+
       <Section
         title="Áreas de atuação"
         description="Explore as principais áreas de pesquisa e ensino"
         align="center"
       >
-        {areasLoading ? (
+        {loading ? (
           <p className="text-center text-gray-base">
             Carregando áreas de atuação...
           </p>
@@ -115,8 +96,8 @@ export function ProfessoresPage() {
               <AreaCard
                 key={area.id}
                 name={area.name}
-                description={area.description}
-                icon={getIcon(area.icon)}
+                description={`${area.count} ${area.count === 1 ? "professor" : "professores"} nesta área.`}
+                icon={GraduationCap}
                 isSelected={selectedArea === area.id}
                 onClick={() => handleAreaToggle(area.id)}
               />
