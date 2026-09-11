@@ -15,8 +15,15 @@ import {
   countProjectsByCategory,
   filterProjects,
 } from "../../utils/project-utils";
+import { useSeo } from "../../hooks/seo";
 
 export function ProjectsPage() {
+  useSeo({
+    title: "Projetos",
+    description:
+      "Conheça os projetos de pesquisa, extensão e inovação do Campus UFC Itapajé.",
+  });
+
   const { projects, loading, error } = useProjects();
   const [searchParams] = useSearchParams();
   const activeCategory = useProjectStore((state) => state.activeCategory);

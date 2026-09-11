@@ -1,7 +1,14 @@
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Section, Text } from "../../components/ui";
+import { useSeo } from "../../hooks/seo";
 
 export function EmpresaJrPage() {
+  useSeo({
+    title: "Empresa Júnior",
+    description:
+      "Conheça os projetos da Empresa Júnior do Campus UFC Itapajé para pequenas empresas e iniciativas comunitárias.",
+  });
+
   const projects = [
     {
       title: "Diagnóstico digital",

@@ -1,7 +1,14 @@
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Section, Text } from "../../components/ui";
+import { useSeo } from "../../hooks/seo";
 
 export function NoticiasEgressosPage() {
+  useSeo({
+    title: "Notícias de Egressos",
+    description:
+      "Notícias e histórias de sucesso de egressos do Campus UFC Itapajé.",
+  });
+
   const news = [
     {
       title: "Egresso participa de pesquisa internacional",

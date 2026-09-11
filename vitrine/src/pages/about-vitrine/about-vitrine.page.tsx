@@ -3,6 +3,7 @@ import { Button, Card, Section, Text } from "../../components/ui";
 import ArticlePerson from "../../assets/icons/article-person.svg";
 import { useNavigate } from "react-router";
 import { GithubLogo } from "@phosphor-icons/react";
+import { useSeo } from "../../hooks/seo";
 
 interface TeamMember {
   name: string;
@@ -38,6 +39,12 @@ const equipe: TeamMember[] = [
 ];
 
 export function AboutVitrinePage() {
+  useSeo({
+    title: "Sobre a Vitrine",
+    description:
+      "Conheça o propósito da Vitrine de Projetos do Campus UFC Itapajé e a equipe que desenvolve e mantém o portal.",
+  });
+
   const navigate = useNavigate();
   const valores = [
     {

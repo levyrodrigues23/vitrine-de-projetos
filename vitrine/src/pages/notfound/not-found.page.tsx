@@ -1,8 +1,15 @@
 import { NavLink } from "react-router";
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { buttonVariants, Card, Section, Text } from "../../components/ui";
+import { useSeo } from "../../hooks/seo";
 
 export function NotFoundPage() {
+  useSeo({
+    title: "Página não encontrada",
+    description: "A página que você tentou acessar não existe ou foi movida.",
+    noIndex: true,
+  });
+
   return (
     <>
       <PageHero

@@ -4,9 +4,16 @@ import Startup from "../../assets/icons/startups.svg";
 import { ProjectCard } from "../../components/features";
 import { useNavigate } from "react-router";
 import { useStartups } from "../../hooks/startup";
+import { useSeo } from "../../hooks/seo";
 
 
 export function StartupsPage() {
+  useSeo({
+    title: "Startups",
+    description:
+      "Conheça as startups do Campus UFC Itapajé: projetos em fase de validação e iniciativas com potencial de negócio.",
+  });
+
   const navigate = useNavigate();
 
   const {startups, loading, error} = useStartups();

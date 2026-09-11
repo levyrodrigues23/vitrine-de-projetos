@@ -2,8 +2,15 @@ import { NavLink } from "react-router";
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Section, Text, buttonVariants } from "../../components/ui";
 import Paper from "../../assets/icons/papers.svg";
+import { useSeo } from "../../hooks/seo";
 
 export default function ProducaoCientificaPage() {
+  useSeo({
+    title: "Produção Científica",
+    description:
+      "Registros e resultados das pesquisas científicas desenvolvidas no Campus UFC Itapajé.",
+  });
+
   return (
     <>
       <PageHero

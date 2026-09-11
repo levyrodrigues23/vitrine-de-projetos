@@ -2,9 +2,16 @@ import { NavLink } from "react-router";
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Section, Text, buttonVariants } from "../../components/ui";
 import Egress from "../../assets/images/egress-image.png";
+import { useSeo } from "../../hooks/seo";
 
 
 export function PortalEgressosPage() {
+  useSeo({
+    title: "Portal de Egressos",
+    description:
+      "Benefícios, histórias e canais para quem concluiu a graduação no Campus UFC Itapajé.",
+  });
+
   return (
     <>
       <PageHero

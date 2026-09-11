@@ -1,8 +1,15 @@
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Icon, Section, Text } from "../../components/ui";
 import Egress from "../../assets/icons/egresss.svg?react";
+import { useSeo } from "../../hooks/seo";
 
 export function EgressosPage() {
+  useSeo({
+    title: "Egressos",
+    description:
+      "Conheça a trajetória profissional dos egressos dos cursos do Campus UFC Itapajé.",
+  });
+
   const courses = [
     {
       title: "Engenharia de Software",

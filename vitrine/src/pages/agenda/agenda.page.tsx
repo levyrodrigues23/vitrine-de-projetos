@@ -2,8 +2,15 @@ import PageHero from "../../components/layout/page-hero/page-hero";
 import { AgendaEventCard } from "../../components/features/agenda-event-card/agenda-event-card";
 import { Section, Text } from "../../components/ui";
 import { MOCK_AGENDA_EVENTS } from "../../constants/agenda.mock";
+import { useSeo } from "../../hooks/seo";
 
 export function AgendaPage() {
+  useSeo({
+    title: "Agenda",
+    description:
+      "Confira a agenda com datas de atividades acadêmicas, minicursos e eventos do Campus UFC Itapajé.",
+  });
+
   const atividades = MOCK_AGENDA_EVENTS.filter((event) =>
     ["academic", "workshop", "lecture"].includes(event.categoryId),
   );

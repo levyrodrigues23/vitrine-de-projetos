@@ -3,8 +3,15 @@ import { NavLink } from "react-router";
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Input, Section, Text, buttonVariants } from "../../components/ui";
 import { useArtigos } from "../../hooks/paper/useArtigos";
+import { useSeo } from "../../hooks/seo";
 
 export default function ArtigosPublicacoesPage() {
+  useSeo({
+    title: "Artigos e Publicações",
+    description:
+      "Artigos e publicações científicas produzidos por alunos e professores do Campus UFC Itapajé.",
+  });
+
   const { papers, loading, error } = useArtigos();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedYear, setSelectedYear] = useState("all");

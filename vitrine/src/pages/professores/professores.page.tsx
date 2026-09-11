@@ -3,6 +3,7 @@ import PageHero from "../../components/layout/page-hero/page-hero";
 import { Section } from "../../components/ui";
 import { TeacherCard, AreaCard } from "../../components/features";
 import { useTeachers, useTeacherAreas } from "../../hooks/teacher";
+import { useSeo } from "../../hooks/seo";
 import {
   Code2,
   BarChart3,
@@ -32,6 +33,12 @@ const getIcon = (iconName: string) => {
 };
 
 export function ProfessoresPage() {
+  useSeo({
+    title: "Professores",
+    description:
+      "Conheça os professores responsáveis pelos projetos de pesquisa, inovação e extensão do Campus UFC Itapajé.",
+  });
+
   const { teachers, loading, error } = useTeachers();
   const { areas, loading: areasLoading } = useTeacherAreas();
   const [selectedArea, setSelectedArea] = useState<string | null>(null);

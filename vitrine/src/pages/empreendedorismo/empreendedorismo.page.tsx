@@ -5,8 +5,15 @@ import Emprenderorismo from "../../assets/icons/empreendorismo.jpg"
 import Pesquisa from "../../assets/icons/pesquisa-nobg (1).svg";
 import Extensao from "../../assets/icons/extensao-nobg (1).svg";
 import Inovacao from "../../assets/icons/inovacao-nobg (1).svg";
+import { useSeo } from "../../hooks/seo";
 
 export function EmpreendedorismoPage() {
+  useSeo({
+    title: "Empreendedorismo",
+    description:
+      "Startups, editais, fomento e iniciativas que conectam ideias ao ecossistema de inovação do Campus UFC Itapajé.",
+  });
+
   return (
     <>
       <PageHero

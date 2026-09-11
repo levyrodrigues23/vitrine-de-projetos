@@ -9,9 +9,16 @@ import {
 } from "../../components/ui";
 import Minicurso from "../../assets/icons/mini-course.svg"
 import { useMinicourses } from "../../hooks/minicourse/useMinicourses";
+import { useSeo } from "../../hooks/seo";
 
 
 export function MinicursosPage() {
+  useSeo({
+    title: "Minicursos",
+    description:
+      "Minicursos internos e externos oferecidos pelo Campus UFC Itapajé.",
+  });
+
   const [filter, setFilter] = useState<"all" | "interno" | "externo">("all");
   const { minicourses, loading, error } = useMinicourses();
 

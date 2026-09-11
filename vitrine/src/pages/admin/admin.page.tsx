@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import { Card, Text, buttonVariants } from "../../components/ui";
 import { useAuthStore } from "../../store/useAuthStore";
 import { useProjects } from "../../hooks/project";
+import { useSeo } from "../../hooks/seo";
 
 
 
@@ -32,6 +33,8 @@ const quickLinks = [
 ];
 
 export function AdminPage() {
+  useSeo({ title: "Administração", noIndex: true });
+
   const user = useAuthStore((state) => state.user);
   const { projects, loading } = useProjects();
 

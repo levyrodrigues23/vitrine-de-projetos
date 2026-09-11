@@ -4,6 +4,7 @@ import { WorksDone } from "../../components/features/trabalhos-feitos/trabalhos-
 import Separator from "../../components/layout/separator/separator";
 import { useDeleteProject, useProject } from "../../hooks/project";
 import { useAuthStore } from "../../store/useAuthStore";
+import { useSeo } from "../../hooks/seo";
 
 
 export function ProjectDetailPage() {
@@ -12,6 +13,12 @@ export function ProjectDetailPage() {
   const { project, loading, error } = useProject(id);
   const { execute: deleteProject, loading: isDeleting } = useDeleteProject();
   const user = useAuthStore((state) => state.user);
+
+  useSeo({
+    title: project?.title ?? "Projeto",
+    description: project?.description,
+    image: project?.imageUrl,
+  });
 
   const canEdit =
     !!user &&

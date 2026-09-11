@@ -1,7 +1,14 @@
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Section, Text } from "../../components/ui";
+import { useSeo } from "../../hooks/seo";
 
 export function EditaisPage() {
+  useSeo({
+    title: "Editais",
+    description:
+      "Editais, programas de pré-aceleração e oportunidades de fomento para projetos do Campus UFC Itapajé.",
+  });
+
   const calls = [
     {
       title: "Edital de Inovação 2026",
