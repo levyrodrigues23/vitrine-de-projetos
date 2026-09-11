@@ -2,6 +2,40 @@ import PageHero from "../../components/layout/page-hero/page-hero";
 import { Button, Card, Section, Text } from "../../components/ui";
 import ArticlePerson from "../../assets/icons/article-person.svg";
 import { useNavigate } from "react-router";
+import { GithubLogo } from "@phosphor-icons/react";
+
+interface TeamMember {
+  name: string;
+  role: string;
+  avatarUrl: string;
+  githubUrl?: string;
+}
+
+const equipe: TeamMember[] = [
+  {
+    name: "José Levy",
+    role: "Frontend",
+    avatarUrl: "https://avatars.githubusercontent.com/u/131412804?v=4",
+    githubUrl: "https://github.com/levyrodrigues23",
+  },
+  {
+    name: "Kauã Rossi",
+    role: "Backend",
+    avatarUrl: "https://avatars.githubusercontent.com/u/81786058?v=4",
+    githubUrl: "https://github.com/KauaRoss",
+  },
+  {
+    name: "Pablo Caio",
+    role: "Backend",
+    avatarUrl: "https://avatars.githubusercontent.com/u/175988310?v=4",
+  },
+  {
+    name: "Suellen Cândido",
+    role: "Frontend",
+    avatarUrl: "https://avatars.githubusercontent.com/u/88504054?v=4",
+    githubUrl: "https://github.com/suellen-candido",
+  },
+];
 
 export function AboutVitrinePage() {
   const navigate = useNavigate();
@@ -88,7 +122,49 @@ export function AboutVitrinePage() {
           ))}
         </div>
       </Section>
-            <div></div>
+
+      <Section
+        title="Nossa equipe"
+        description="Conheça quem desenvolve e mantém a Vitrine de Projetos."
+        showSeparator={true}
+        align="center"
+      >
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {equipe.map((membro) => (
+            <Card
+              key={membro.name}
+              className="flex flex-col items-center gap-3 p-6 text-center"
+            >
+              <img
+                src={membro.avatarUrl}
+                alt={`Foto de ${membro.name}`}
+                className="h-24 w-24 rounded-full object-cover"
+              />
+              <div>
+                <Text as="h3" variant="body-lg-bold">
+                  {membro.name}
+                </Text>
+                <Text variant="body-sm" className="text-gray-base">
+                  {membro.role}
+                </Text>
+              </div>
+              {membro.githubUrl && (
+                <a
+                  href={membro.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-gray-base transition hover:text-blue-dark"
+                  title={`Perfil de ${membro.name} no GitHub`}
+                >
+                  <GithubLogo className="h-5 w-5" />
+                  <span className="text-sm">GitHub</span>
+                </a>
+              )}
+            </Card>
+          ))}
+        </div>
+      </Section>
+
       <Section
         align="center"
         title="Conheça nossos projetos"
