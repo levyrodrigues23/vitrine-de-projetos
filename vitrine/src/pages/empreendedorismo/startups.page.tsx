@@ -2,7 +2,6 @@ import PageHero from "../../components/layout/page-hero/page-hero";
 import {  Section, Text } from "../../components/ui";
 import Startup from "../../assets/icons/startups.svg";
 import { ProjectCard } from "../../components/features";
-import { useNavigate } from "react-router";
 import { useStartups } from "../../hooks/startup";
 import { useSeo } from "../../hooks/seo";
 
@@ -14,20 +13,7 @@ export function StartupsPage() {
       "Conheça as startups do Campus UFC Itapajé: projetos em fase de validação e iniciativas com potencial de negócio.",
   });
 
-  const navigate = useNavigate();
-
   const {startups, loading, error} = useStartups();
-
-  const handleSearchSubmit = (q: string) => {
-      const url = `/startup?busca=${encodeURIComponent}`
-      navigate(url)
-  }
-
-  
-
-
-
-  
 
   return (
     <>
@@ -68,21 +54,29 @@ export function StartupsPage() {
         />
       </div>
       <Section title="Startups em andamento" showSeparator={false} align="center">
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {startups.map((startup) => (
-            <div key={startup.title} className="flex flex-col items-center">
-              <ProjectCard
-                title={startup.title}
-                description={startup.description}
-                category={startup.category}
-                imageUrl={startup.icon}
-              />
-             </div>
-           ))}
-        </div>
+        {loading ? (
+          <p className="text-center text-gray-base">Carregando startups...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">{error}</p>
+        ) : startups.length === 0 ? (
+          <p className="text-center text-gray-base">
+            Nenhuma startup cadastrada no momento.
+          </p>
+        ) : (
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {startups.map((startup) => (
+              <div key={startup.id} className="flex flex-col items-center">
+                <ProjectCard
+                  title={startup.title}
+                  description={startup.description}
+                  category={startup.category}
+                  imageUrl={startup.imageUrl}
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </Section>
-
-       
     </>
   );
 }
