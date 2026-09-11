@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getIdArtigo } from "../../services/papers.service";
+import { getArtigoById } from "../../services/papers.service";
 import { queryKeys } from "../../services/query-keys";
 
 export function useArtigo(id?: string) {
@@ -11,7 +11,7 @@ export function useArtigo(id?: string) {
     queryKey,
     queryFn: () => {
       if (!id) throw new Error("Artigo id is required.");
-      return getIdArtigo(id);
+      return getArtigoById(id);
     },
     enabled: Boolean(id),
   });
