@@ -31,18 +31,20 @@ export function EgressosPage() {
         title="Egressos por Curso"
         subtitle="Panorama dos egressos do campus e suas áreas de atuação."
       />
-      <Section title="O que é Empreendedorismo?">
+      <Section title="Por que acompanhar os egressos?">
         <div className="flex md:flex-row flex-col bg-white p-4 items-center rounded-2xl text-shadow-olive-200 shadow-2xl">
           <Text className="pt-3 pl-3" as="h2" variant="body-lg">
-            O <strong>empreendedorismo</strong> transforma ideias em soluções e
-            negócios sustentáveis, conectando conhecimento acadêmico a desafios
-            reais do território. No campus, isso acontece por meio de
-            iniciativas, startups, desafios e programas de fomento que
-            impulsionam a inovação.
+            Os <strong>egressos</strong> são ex-alunos que concluíram a
+            graduação no Campus Itapajé e seguem carreira acadêmica ou
+            profissional dentro e fora da universidade. Acompanhar sua
+            trajetória ajuda a entender o impacto da formação oferecida pelo
+            campus e fortalece a conexão entre a instituição e quem já passou
+            por ela.
             <br />
-            <br />A partir desse movimento, estudantes desenvolvem competências
-            como criatividade, validação de mercado e trabalho em equipe,
-            aproximando a universidade da comunidade e do ecossistema local.
+            <br />Nesta página você encontra um panorama de cursos e as
+            principais áreas em que os egressos atuam depois de formados,
+            servindo como referência para estudantes e para a comunidade
+            acadêmica.
           </Text>
 
           <Icon
