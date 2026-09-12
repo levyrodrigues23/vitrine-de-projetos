@@ -1,6 +1,11 @@
+import { useState } from "react";
 import PageHero from "../../components/layout/page-hero/page-hero";
-import { Card, Icon, Section, Text } from "../../components/ui";
+import { Icon, Section, Text } from "../../components/ui";
+import { EgressoCard } from "../../components/features";
 import Egress from "../../assets/icons/egresss.svg?react";
+import { useEgressos } from "../../hooks/egress";
+import { EGRESSO_CURSO_FILTERS } from "../../constants/egressos.mock";
+import type { Curso } from "../../types/egress.types";
 import { useSeo } from "../../hooks/seo";
 
 export function EgressosPage() {
@@ -10,20 +15,12 @@ export function EgressosPage() {
       "Conheça a trajetória profissional dos egressos dos cursos do Campus UFC Itapajé.",
   });
 
-  const courses = [
-    {
-      title: "Engenharia de Software",
-      description: "Egressos atuando em empresas de tecnologia e startups.",
-    },
-    {
-      title: "Sistemas de Informação",
-      description: "Profissionais em análise de dados e gestão de projetos.",
-    },
-    {
-      title: "Redes de Computadores",
-      description: "Atuação em infraestrutura, segurança e suporte técnico.",
-    },
-  ];
+  const { egressos, loading, error } = useEgressos();
+  const [selectedCurso, setSelectedCurso] = useState<Curso | null>(null);
+
+  const filteredEgressos = selectedCurso
+    ? egressos.filter((egresso) => egresso.curso === selectedCurso)
+    : egressos;
 
   return (
     <>
@@ -53,25 +50,56 @@ export function EgressosPage() {
           />
         </div>
       </Section>
-      <Section title="Cursos e atuações" showSeparator={false}>
-        <Text as="h2" variant="body-lg" className="text-center md:text-left">
-          Seleção de cursos com exemplos de áreas em que os egressos atuam.
-        </Text>
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {courses.map((course) => (
-            <Card
-              key={course.title}
-              className="p-6 space-y-3 text-center md:text-left"
+
+      <Section
+        title="Egressos em destaque"
+        description="Conheça alguns egressos e onde estão atuando depois de formados."
+        showSeparator={false}
+        align="center"
+      >
+        <div className="mb-8 flex flex-wrap justify-center gap-3">
+          <button
+            type="button"
+            onClick={() => setSelectedCurso(null)}
+            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+              selectedCurso === null
+                ? "bg-blue-dark text-white"
+                : "border border-blue-dark/30 text-blue-dark hover:bg-blue-dark/10"
+            }`}
+          >
+            Todos os cursos
+          </button>
+          {EGRESSO_CURSO_FILTERS.map((curso) => (
+            <button
+              key={curso}
+              type="button"
+              onClick={() => setSelectedCurso(curso)}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                selectedCurso === curso
+                  ? "bg-blue-dark text-white"
+                  : "border border-blue-dark/30 text-blue-dark hover:bg-blue-dark/10"
+              }`}
             >
-              <Text as="h3" variant="body-lg-bold">
-                {course.title}
-              </Text>
-              <Text variant="body-md" className="text-gray-base">
-                {course.description}
-              </Text>
-            </Card>
+              {curso}
+            </button>
           ))}
         </div>
+
+        {loading ? (
+          <p className="text-center text-gray-base">Carregando egressos...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">{error}</p>
+        ) : filteredEgressos.length === 0 ? (
+          <p className="text-center text-gray-base">
+            Nenhum egresso encontrado para este curso.
+          </p>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredEgressos.map((egresso) => (
+              <EgressoCard key={egresso.id} egresso={egresso} />
+            ))}
+          </div>
+        )}
       </Section>
     </>
   );

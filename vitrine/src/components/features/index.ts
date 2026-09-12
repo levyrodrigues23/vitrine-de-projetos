@@ -11,3 +11,5 @@ export type { ProjectFilterProps } from "./project-filter/project-filter.types";
 export { ProjectCategoryNavCard } from "./project-category-nav-card/project-category-nav-card";
 export type { ProjectCategoryNavCardProps } from "./project-category-nav-card/project-category-nav-card";
 export { WorkDoneForm } from "./work-done-form/work-done-form";
+export { EgressoCard } from "./egresso-card/egresso-card";
+export type { EgressoCardProps } from "./egresso-card/egresso-card";
