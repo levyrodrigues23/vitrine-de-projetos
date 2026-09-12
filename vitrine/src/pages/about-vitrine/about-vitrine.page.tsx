@@ -29,6 +29,7 @@ const equipe: TeamMember[] = [
     name: "Pablo Caio",
     role: "Backend",
     avatarUrl: "https://avatars.githubusercontent.com/u/175988310?v=4",
+    githubUrl: "https://github.com/PabloCaioSantos",
   },
   {
     name: "Suellen Cândido",
