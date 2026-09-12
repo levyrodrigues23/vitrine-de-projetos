@@ -1,0 +1,1 @@
+export { useProducaoTecnica } from "./useProducaoTecnica";
