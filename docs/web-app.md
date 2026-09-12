@@ -75,3 +75,31 @@ vitrine/src/components
 ```
 
 Prefer existing UI and layout components before creating new visual patterns.
+
+## SEO and metadata
+
+Each public page sets its own title, description and Open Graph tags with the `useSeo` hook:
+
+```text
+vitrine/src/hooks/seo
+```
+
+Call it once near the top of a page component with a `title` and, when relevant, a `description`. Authenticated routes (login, admin, gerenciador) and the 404 page pass `noIndex: true`. Static fallbacks for the pre-hydration state live in `vitrine/index.html`.
+
+`robots.txt` and `sitemap.xml` are generated from an explicit list of public routes in:
+
+```text
+vitrine/scripts/generate-seo-files.mjs
+```
+
+It runs automatically before `pnpm build` and can be run manually with `pnpm generate:seo`. When a public route is added or removed, update the `PUBLIC_ROUTES` list in that script. The site domain comes from `VITE_SITE_URL`; without it, a placeholder domain is used.
+
+## Project search
+
+Project search (used by the Home hero and by the header/mobile menu) shares one Fuse.js-based hook:
+
+```text
+vitrine/src/hooks/search
+```
+
+New search entry points should reuse `useProjectSearchSuggestions` instead of adding another Fuse.js instance.
