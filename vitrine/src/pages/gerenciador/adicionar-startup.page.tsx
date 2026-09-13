@@ -14,6 +14,9 @@ import {
   FormTextarea,
   Input,
 } from "../../components/ui";
+import { formatLabel } from "../../utils/label-utils";
+
+const SECTOR_OPTIONS = ["tecnologia", "agro", "saude", "educacao"] as const;
 
 const startupSchema = z.object({
   name: z.string().min(3, "Informe o nome da startup."),
@@ -93,10 +96,11 @@ export function AdicionarStartupPage() {
                   errors.sector ? "border-red/60 focus-visible:ring-red/30" : ""
                 }
               >
-                <option value="tecnologia">Tecnologia</option>
-                <option value="agro">Agro</option>
-                <option value="saude">Saúde</option>
-                <option value="educacao">Educação</option>
+                {SECTOR_OPTIONS.map((option) => (
+                  <option key={option} value={option}>
+                    {formatLabel(option)}
+                  </option>
+                ))}
               </FormSelect>
             </FormField>
           </div>
@@ -280,7 +284,7 @@ export function AdicionarStartupPage() {
                   Setor
                 </p>
                 <p className="mt-2 text-sm font-semibold text-black">
-                  {submitted.sector}
+                  {formatLabel(submitted.sector)}
                 </p>
               </div>
               <div>
@@ -288,7 +292,7 @@ export function AdicionarStartupPage() {
                   Estágio
                 </p>
                 <p className="mt-2 text-sm font-semibold text-black">
-                  {submitted.stage}
+                  {formatLabel(submitted.stage)}
                 </p>
               </div>
               <div>
