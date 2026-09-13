@@ -6,6 +6,10 @@ import type {
   UpdateArtigoPayload,
 } from "../types/papers.types";
 
+// TODO(#33): there is no Papers feature in backend/VitrineAPI/VitrineAPI/Features yet
+// (only Projects, Teachers, WorksDone and Upload exist). Every call below hits an
+// endpoint that doesn't exist on the real API - pending backend gap, not a fix.
+
 
 export async function listArtigos(): Promise<Artigo[]> {
   const response = await api.get<Artigo[]>("/papers");

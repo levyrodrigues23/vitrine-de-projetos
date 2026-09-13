@@ -2,6 +2,10 @@ import { api } from "./api";
 import { AxiosError } from "axios";
 import type { ProjetoEmpresaJr } from "../types/projetoEmpresaJr.types";
 
+// TODO(#33): there is no JuniorCompany feature in backend/VitrineAPI/VitrineAPI/Features
+// yet (only Projects, Teachers, WorksDone and Upload exist). Every call below hits an
+// endpoint that doesn't exist on the real API - pending backend gap, not a fix.
+
 export type CreateJuniorCompanyPayload = Omit<ProjetoEmpresaJr, "id">;
 
 export async function listJuniorCompanies(): Promise<ProjetoEmpresaJr[]> {
