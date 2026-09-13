@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { expect, fn, userEvent, within } from "storybook/test";
 import { Button } from "./button.tsx";
 
 const meta: Meta<typeof Button> = {
@@ -16,6 +17,21 @@ export const Default: Story = {
     children: "Click me",
     variant: "primary",
     size: "sm",
+  },
+};
+
+export const ClickInteraction: Story = {
+  args: {
+    children: "Click me",
+    onClick: fn(),
+  },
+  play: async ({ args, canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole("button", { name: "Click me" });
+
+    await userEvent.click(button);
+
+    await expect(args.onClick).toHaveBeenCalledOnce();
   },
 };
 
