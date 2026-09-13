@@ -1,6 +1,6 @@
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { AgendaEventCard } from "../../components/features/agenda-event-card/agenda-event-card";
-import { Section, Text } from "../../components/ui";
+import { Section } from "../../components/ui";
 import { MOCK_AGENDA_EVENTS } from "../../constants/agenda.mock";
 import { useSeo } from "../../hooks/seo";
 
@@ -24,11 +24,10 @@ export function AgendaPage() {
         title="Agenda"
         subtitle="Agenda com datas de atividades, minicursos e eventos do campus."
       />
-      <Section title="Atividades">
-        <Text as="h2" variant="body-lg" className="text-center md:text-left">
-          Atividades acadêmicas, oficinas, palestras e minicursos realizados no
-          campus e abertos para a comunidade.
-        </Text>
+      <Section
+        title="Atividades"
+        description="Atividades acadêmicas, oficinas, palestras e minicursos realizados no campus e abertos para a comunidade."
+      >
         <ul className="mt-8 grid list-none gap-6 p-0 sm:grid-cols-2">
           {atividades.map((event) => (
             <li key={event.id}>
@@ -37,10 +36,11 @@ export function AgendaPage() {
           ))}
         </ul>
       </Section>
-      <Section title="Eventos" showSeparator={false}>
-        <Text as="h2" variant="body-lg" className="text-center md:text-left">
-          Eventos especiais, competições e defesas com datas e locais definidos.
-        </Text>
+      <Section
+        title="Eventos"
+        description="Eventos especiais, competições e defesas com datas e locais definidos."
+        showSeparator={false}
+      >
         <ul className="mt-8 grid list-none gap-6 p-0 sm:grid-cols-2">
           {eventos.map((event) => (
             <li key={event.id}>

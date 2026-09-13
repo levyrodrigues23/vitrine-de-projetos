@@ -66,7 +66,7 @@ export function ProfessoresPage() {
                   key={teacher.id}
                   name={teacher.name}
                   grau={teacher.grau}
-                  imageUrl={undefined}
+                  imageUrl={teacher.imageUrl}
                   lattes={teacher.lattes}
                 />
               ))

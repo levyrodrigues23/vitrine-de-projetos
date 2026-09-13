@@ -18,17 +18,15 @@ export function NoticiasEgressosPage() {
         title="Notícias dos Egressos"
         subtitle="Destaques e notícias sobre atuações de egressos do campus."
       />
-      <Section title="Destaques">
-        <Text as="h2" variant="body-lg" className="text-center md:text-left">
-          Notícias pontuais sobre atuações científicas, profissionais e projetos
-          realizados por egressos do Campus Itapajé.
-        </Text>
-      </Section>
-      <Section title="Notícias recentes" showSeparator={false}>
-        <Text as="h2" variant="body-lg" className="text-center md:text-left">
-          Seleção de notícias e destaques recentes da comunidade de egressos.
-        </Text>
-
+      <Section
+        title="Destaques"
+        description="Notícias pontuais sobre atuações científicas, profissionais e projetos realizados por egressos do Campus Itapajé."
+      />
+      <Section
+        title="Notícias recentes"
+        description="Seleção de notícias e destaques recentes da comunidade de egressos."
+        showSeparator={false}
+      >
         {loading ? (
           <p className="mt-8 text-center text-gray-base">
             Carregando notícias...

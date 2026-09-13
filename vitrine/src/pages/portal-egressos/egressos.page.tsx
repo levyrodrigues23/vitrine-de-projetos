@@ -30,7 +30,7 @@ export function EgressosPage() {
       />
       <Section title="Por que acompanhar os egressos?">
         <div className="flex md:flex-row flex-col bg-white p-4 items-center rounded-2xl text-shadow-olive-200 shadow-2xl">
-          <Text className="pt-3 pl-3" as="h2" variant="body-lg">
+          <Text className="pt-3 pl-3" as="p" variant="body-lg">
             Os <strong>egressos</strong> são ex-alunos que concluíram a
             graduação no Campus Itapajé e seguem carreira acadêmica ou
             profissional dentro e fora da universidade. Acompanhar sua
