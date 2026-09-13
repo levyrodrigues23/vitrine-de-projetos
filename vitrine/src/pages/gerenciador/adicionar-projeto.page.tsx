@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
 
 import {
   projectFormSchema,
+  type ProjectFormInput,
   type ProjectFormValues,
 } from "../../schemas/project.schema";
 import { useCreateProject } from "../../hooks/project/useCreateProject";
@@ -33,7 +34,7 @@ const CATEGORY_MAP: Record<
   pesquisa: "Pesquisa",
 };
 
-const DEFAULT_VALUES: ProjectFormValues = {
+const DEFAULT_VALUES: ProjectFormInput = {
   category: "inovação",
   title: "",
   responsible: "",
@@ -43,7 +44,7 @@ const DEFAULT_VALUES: ProjectFormValues = {
 };
 
 type MainImageFieldProps = {
-  field: ControllerRenderProps<ProjectFormValues, "imageFile">;
+  field: ControllerRenderProps<ProjectFormInput, "imageFile">;
   error?: string;
 };
 
@@ -89,7 +90,7 @@ export function AdicionarProjetoPage() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<ProjectFormValues>({
+  } = useForm<ProjectFormInput, unknown, ProjectFormValues>({
     resolver: zodResolver(projectFormSchema),
     defaultValues: DEFAULT_VALUES,
   });

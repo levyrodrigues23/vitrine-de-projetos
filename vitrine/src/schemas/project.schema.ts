@@ -28,7 +28,11 @@ export const imageFileSchema = z
 
 export const workDoneFormSchema = z.object({
   title: z.string().min(2, "Informe um título com ao menos 2 caracteres."),
-  category: z.enum(["inovação", "extensão", "pesquisa"]),
+  category: z
+    .enum(["", "inovação", "extensão", "pesquisa"])
+    .refine((value) => value !== "", {
+      message: "Selecione uma categoria.",
+    }),
   description: z
     .string()
     .min(10, "A descrição deve ter ao menos 10 caracteres."),
@@ -48,6 +52,7 @@ export const projectFormSchema = z.object({
 
 export type WorkDoneFormValues = z.infer<typeof workDoneFormSchema>;
 export type ProjectFormValues = z.infer<typeof projectFormSchema>;
+export type ProjectFormInput = z.input<typeof projectFormSchema>;
 
 export const workDoneSchema = z.object({
   id: z.string(),

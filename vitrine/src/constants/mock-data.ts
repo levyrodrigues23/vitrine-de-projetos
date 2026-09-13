@@ -1,5 +1,4 @@
 import { ProjectCategory, type Project } from "../types/project.types";
-import type { Teacher } from "../types/teachers.types";
 
 export const MOCK_PROJECTS: Project[] = [
   {
@@ -102,108 +101,6 @@ export const MOCK_PROJECTS: Project[] = [
         imageUrl: "https://images.unsplash.com/photo-1516534775068-bb57e39f0bca?w=500&h=300&fit=crop",
       },
     ],
-  },
-];
-
-export const MOCK_TEACHERS: Teacher[] = [
-  {
-    id: "1",
-    name: "Dr. João Silva",
-    role: "Professor de Engenharia de Software",
-    area: "Engenharia de Software",
-    course: "ADS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop",
-    githubUrl: "https://github.com/joao-silva",
-    lattesUrl: "http://lattes.cnpq.br/1234567890123456",
-  },
-  {
-    id: "2",
-    name: "Dra. Maria Santos",
-    role: "Professora de Ciência de Dados",
-    area: "Ciência de Dados",
-    course: "Ciência de Dados",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&h=500&fit=crop",
-    githubUrl: "https://github.com/maria-santos",
-    lattesUrl: "http://lattes.cnpq.br/1234567890123457",
-  },
-  {
-    id: "3",
-    name: "Prof. Carlos Oliveira",
-    role: "Professor de Inteligência Artificial",
-    area: "Inteligência Artificial",
-    course: "ADS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=500&fit=crop",
-    githubUrl: "https://github.com/carlos-oliveira",
-    lattesUrl: "http://lattes.cnpq.br/1234567890123458",
-  },
-  {
-    id: "4",
-    name: "Profa. Ana Costa",
-    role: "Professora de Desenvolvimento Web",
-    area: "Desenvolvimento Web",
-    course: "ADS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop",
-    githubUrl: "https://github.com/ana-costa",
-    lattesUrl: "http://lattes.cnpq.br/1234567890123459",
-  },
-  {
-    id: "5",
-    name: "Prof. Pedro Alves",
-    role: "Professor de Banco de Dados",
-    area: "Banco de Dados",
-    course: "ADS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop",
-    githubUrl: "https://github.com/pedro-alves",
-    lattesUrl: "http://lattes.cnpq.br/1234567890123460",
-  },
-  {
-    id: "6",
-    name: "Dra. Juliana Ferreira",
-    role: "Professora de Computação Gráfica",
-    area: "Jogos",
-    course: "ADS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&h=500&fit=crop",
-    githubUrl: "https://github.com/juliana-ferreira",
-    lattesUrl: "http://lattes.cnpq.br/1234567890123461",
-  },
-  {
-    id: "7",
-    name: "Prof. Ricardo Mendes",
-    role: "Professor de Segurança da Informação",
-    area: "Segurança da Informação",
-    course: "Segurança da Informação",
-    imageUrl:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=500&fit=crop",
-    githubUrl: "https://github.com/ricardo-mendes",
-    lattesUrl: "http://lattes.cnpq.br/1234567890123462",
-  },
-  {
-    id: "8",
-    name: "Profa. Gabriela Rocha",
-    role: "Professora de Redes de Computadores",
-    area: "Redes de Computadores",
-    course: "ADS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=500&fit=crop",
-    githubUrl: "https://github.com/gabriela-rocha",
-    lattesUrl: "http://lattes.cnpq.br/1234567890123463",
-  },
-  {
-    id: "9",
-    name: "Prof. Fernando Dias",
-    role: "Professor de Arquitetura de Sistemas",
-    area: "Arquitetura de Sistemas",
-    course: "ADS",
-    imageUrl:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=500&fit=crop",
-    githubUrl: "https://github.com/fernando-dias",
-    lattesUrl: "http://lattes.cnpq.br/1234567890123464",
   },
 ];
 

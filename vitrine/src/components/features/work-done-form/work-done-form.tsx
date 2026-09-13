@@ -4,13 +4,13 @@ import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { ArrowDown, ArrowUp, Trash2 } from "lucide-react";
 
 import { Button, FormField, FormTextarea, Input, FormSelect } from "../../ui";
-import type { ProjectFormValues } from "../../../schemas/project.schema";
+import type { ProjectFormInput } from "../../../schemas/project.schema";
 
 type WorkDoneFormProps = {
   index: number;
-  control: Control<ProjectFormValues>;
-  register: UseFormRegister<ProjectFormValues>;
-  errors: FieldErrors<ProjectFormValues>;
+  control: Control<ProjectFormInput>;
+  register: UseFormRegister<ProjectFormInput>;
+  errors: FieldErrors<ProjectFormInput>;
   onRemove: () => void;
   onMoveUp: () => void;
   onMoveDown: () => void;
