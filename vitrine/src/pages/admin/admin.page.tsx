@@ -16,10 +16,9 @@ const quickLinks = [
   },
   {
     title: "Gerenciar usuários",
-    description: "Controle acessos e permissões das contas internas.",
-    to: "#",
-    cta: "Em breve",
-    disabled: true,
+    description: "Veja os gerenciadores e o que cada um cadastrou.",
+    to: "/admin/usuarios",
+    cta: "Abrir",
     icon: "👥",
   },
   {

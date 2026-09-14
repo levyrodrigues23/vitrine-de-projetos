@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router";
 import { HomePage } from "../pages/home/home.page";
 import { AboutVitrinePage } from "../pages/about-vitrine/about-vitrine.page";
 import { AdminPage } from "../pages/admin/admin.page";
+import { GerenciarUsuariosPage } from "../pages/admin/gerenciar-usuarios.page";
 import { AgendaPage } from "../pages/agenda/agenda.page";
 import { EmpreendedorismoPage } from "../pages/empreendedorismo/empreendedorismo.page";
 import { LoginPage } from "../pages/login/login.page";
@@ -130,6 +131,10 @@ export const router = createBrowserRouter([
           {
             index: true,
             element: <AdminPage />,
+          },
+          {
+            path: "usuarios",
+            element: <GerenciarUsuariosPage />,
           },
         ],
       },
