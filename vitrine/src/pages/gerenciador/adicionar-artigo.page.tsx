@@ -41,6 +41,7 @@ const defaultValues: ArticleFormValues = {
 export function AdicionarArtigoPage() {
   const { execute, loading } = useCreateArtigo();
   const [submitted, setSubmitted] = useState<ArticleFormValues | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -52,7 +53,7 @@ export function AdicionarArtigoPage() {
   });
 
   const onSubmit = async (values: ArticleFormValues) => {
-    setSubmitted(values);
+    setSubmitError(null);
 
     const paper = {
       titulo: values.titulo,
@@ -65,7 +66,14 @@ export function AdicionarArtigoPage() {
       congressoId: values.congressoId,
     };
 
-    await execute(paper);
+    const result = await execute(paper);
+
+    if (!result.success) {
+      setSubmitError(result.error ?? "Erro ao publicar o artigo.");
+      return;
+    }
+
+    setSubmitted(values);
   };
 
   return (
@@ -74,6 +82,12 @@ export function AdicionarArtigoPage() {
       subtitle="Cadastro de publicações científicas com autoria, veículo e vínculo com linhas de pesquisa."
     >
       <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+        {submitError && (
+          <div className="rounded-2xl border border-red/20 bg-red/5 p-4 text-sm text-red">
+            {submitError}
+          </div>
+        )}
+
         <FormSectionCard
           title="Dados da publicação"
           description="Informações principais do artigo científico."
