@@ -9,12 +9,7 @@ export const projectCategorySchema = z.enum([
 export type ProjectCategoryValue = z.infer<typeof projectCategorySchema>;
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
-const ALLOWED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/gif",
-];
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 export const imageFileSchema = z
   .custom<File>((val) => val instanceof File, {
@@ -23,7 +18,7 @@ export const imageFileSchema = z
   .refine((f) => f.size <= MAX_IMAGE_SIZE, "A imagem deve ter no máximo 5MB.")
   .refine(
     (f) => ALLOWED_IMAGE_TYPES.includes(f.type),
-    "Formato não permitido. Use JPEG, PNG, WEBP ou GIF.",
+    "Formato não permitido. Use JPEG, PNG ou WEBP.",
   );
 
 export const workDoneFormSchema = z.object({
