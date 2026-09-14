@@ -19,4 +19,5 @@ export const queryKeys = {
   noticesDetail: (id: string) => ["notices", id] as const,
   producaoTecnica: ["producao-tecnica"] as const,
   egressNews: ["egress-news"] as const,
+  managers: ["managers"] as const,
 };
