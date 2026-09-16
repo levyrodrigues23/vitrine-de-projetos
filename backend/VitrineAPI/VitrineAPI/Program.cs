@@ -9,6 +9,7 @@ using VitrineAPI.Features.WorksDone.Endpoints;
 using VitrineAPI.Features.Startups.Endpoints;
 using VitrineAPI.Features.Congresses.Endpoints;
 using VitrineAPI.Features.Papers.Endpoints;
+using VitrineAPI.Features.JrCompanyProjects.Endpoints;
 
 namespace VitrineAPI
 {
@@ -95,6 +96,13 @@ namespace VitrineAPI
             builder.Services.AddScoped<GetPapersHandler>();
             builder.Services.AddScoped<UpdatePaperHandler>();
             builder.Services.AddScoped<DeletePaperHandler>();
+
+            // JrCompanyProjects handlers
+            builder.Services.AddScoped<CreateJrCompanyProjectHandler>();
+            builder.Services.AddScoped<GetJrCompanyProjectByIdHandler>();
+            builder.Services.AddScoped<GetJrCompanyProjectsHandler>();
+            builder.Services.AddScoped<UpdateJrCompanyProjectHandler>();
+            builder.Services.AddScoped<DeleteJrCompanyProjectHandler>();
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
