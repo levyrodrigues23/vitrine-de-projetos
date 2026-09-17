@@ -10,6 +10,7 @@ import {
   PROJECT_CATEGORIES,
 } from "../../constants/project-categories";
 import { filterProjects } from "../../utils/project-utils";
+import { useSeo } from "../../hooks/seo";
 
 function categoryFromPath(pathname: string): ProjectCategory | null {
   if (pathname.endsWith("/pesquisa")) return ProjectCategory.Pesquisa;
@@ -32,6 +33,13 @@ export function ProjectListPage() {
   const categoryMeta = PROJECT_CATEGORIES.find(
     (meta) => meta.category === activeCategory,
   );
+
+  useSeo({
+    title: activeCategory
+      ? `Projetos de ${activeCategory}`
+      : "Categoria não encontrada",
+    description: categoryMeta?.description,
+  });
 
   const filtered = useMemo(() => {
     if (!activeCategory) return [];

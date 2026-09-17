@@ -3,8 +3,15 @@ import {NavLink} from "react-router";
 import PageHero from "../../components/layout/page-hero/page-hero";
 import {Card, Section, Text, buttonVariants} from "../../components/ui";
 import {useCongresses} from "../../hooks/congress/useCongresses";
+import { useSeo } from "../../hooks/seo";
 
 export default function CongressesSimposiosPage() {
+    useSeo({
+        title: "Congressos e Simpósios",
+        description:
+            "Congressos e simpósios com participação de alunos e professores do Campus UFC Itapajé.",
+    });
+
     const { congresses, loading, error } = useCongresses();
     const [search, setSearch] = useState("");
 
@@ -73,7 +80,6 @@ export default function CongressesSimposiosPage() {
 
                 )}
             </Section>
-            div
             <Section showSeparator={false} align="center">
                 <NavLink
                     to="/producao-cientifica"

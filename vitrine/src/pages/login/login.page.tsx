@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 
 import { useAuthStore } from "../../store/useAuthStore";
 import { Text, Input } from "../../components/ui";
+import { useSeo } from "../../hooks/seo";
 
 const loginSchema = z.object({
   email: z.string().email("E-mail inválido. Utilize o e-mail institucional."),
@@ -15,6 +16,8 @@ const loginSchema = z.object({
 type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginPage() {
+  useSeo({ title: "Login", noIndex: true });
+
   const navigate = useNavigate();
   const login = useAuthStore((state) => state.login);
   const [authError, setAuthError] = useState<string | null>(null);

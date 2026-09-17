@@ -2,8 +2,15 @@ import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Section, Text } from "../../components/ui";
 import Technical from "../../assets/icons/productions.svg";
 import { ProjectCard } from "../../components/features";
+import { useSeo } from "../../hooks/seo";
 
 export function ProducaoTecnicaPage() {
+useSeo({
+  title: "Produção Técnica",
+  description:
+    "Softwares, aplicativos e demais produções técnicas desenvolvidas no Campus UFC Itapajé.",
+});
+
 const artifacts = [
   {
     title: "Sistema de monitoramento",

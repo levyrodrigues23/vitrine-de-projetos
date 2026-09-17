@@ -3,4 +3,3 @@ export { useTeacherById } from "./useTeacherById";
 export { useCreateTeacher } from "./useCreateTeacher";
 export { useUpdateTeacher } from "./useUpdateTeacher";
 export { useDeleteTeacher } from "./useDeleteTeacher";
-export { useTeacherAreas } from "./useTeacherAreas";

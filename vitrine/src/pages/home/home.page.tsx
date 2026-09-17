@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { useSeo } from "../../hooks/seo";
 import Hero from "../../components/layout/hero-section/hero";
 import { Section, Card, Text } from "../../components/ui";
 import { ProjectCard } from "../../components/features";
@@ -14,6 +15,12 @@ import { NavLink } from "react-router";
 import { ArrowRight } from "lucide-react";
 
 export function HomePage() {
+  useSeo({
+    title: "Início",
+    description:
+      "Conheça os projetos de pesquisa, inovação e extensão do Campus UFC Itapajé, seus professores responsáveis e a produção acadêmica do campus.",
+  });
+
   const { projects, loading, error } = useProjects();
 
   const featuredProjects = projects.slice(0, 3);

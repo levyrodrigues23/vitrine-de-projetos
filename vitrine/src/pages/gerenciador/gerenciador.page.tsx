@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import { Card, Text, buttonVariants } from "../../components/ui";
 import { useAuthStore } from "../../store/useAuthStore";
 import { useProjects } from "../../hooks/project";
+import { useSeo } from "../../hooks/seo";
 
 const actions = [
   {
@@ -55,6 +56,8 @@ const actions = [
 ];
 
 export function GerenciadorPage() {
+  useSeo({ title: "Painel do Gerenciador", noIndex: true });
+
   const user = useAuthStore((state) => state.user);
   const { projects, loading } = useProjects();
   

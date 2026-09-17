@@ -1,21 +1,16 @@
 import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Section, Text } from "../../components/ui";
+import { useJuniorCompanies } from "../../hooks/junior-company";
+import { useSeo } from "../../hooks/seo";
 
 export function EmpresaJrPage() {
-  const projects = [
-    {
-      title: "Diagnóstico digital",
-      description: "Mapeamento de processos para pequenas empresas locais.",
-    },
-    {
-      title: "Identidade visual",
-      description: "Projeto de comunicação para iniciativas comunitárias.",
-    },
-    {
-      title: "Automação simples",
-      description: "Planilhas e rotinas para melhorar a gestão de dados.",
-    },
-  ];
+  useSeo({
+    title: "Empresa Júnior",
+    description:
+      "Conheça os projetos da Empresa Júnior do Campus UFC Itapajé para pequenas empresas e iniciativas comunitárias.",
+  });
+
+  const { companies, loading, error } = useJuniorCompanies();
 
   return (
     <>
@@ -34,21 +29,36 @@ export function EmpresaJrPage() {
         showSeparator={false}
         align="center"
       >
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
-            <Card
-              key={project.title}
-              className="flex flex-col items-center p-6 space-y-3 text-center md:items-start md:text-left"
-            >
-              <Text as="h3" variant="body-lg-bold">
-                {project.title}
-              </Text>
-              <Text variant="body-md" className="text-gray-base">
-                {project.description}
-              </Text>
-            </Card>
-          ))}
-        </div>
+        {loading ? (
+          <p className="text-center text-gray-base">Carregando projetos...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">{error}</p>
+        ) : companies.length === 0 ? (
+          <p className="text-center text-gray-base">
+            Nenhum projeto registrado no momento.
+          </p>
+        ) : (
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {companies.map((company) => (
+              <Card
+                key={company.id}
+                className="flex flex-col items-center p-6 space-y-3 text-center md:items-start md:text-left"
+              >
+                <Text as="h3" variant="body-lg-bold">
+                  {company.title}
+                </Text>
+                <Text variant="body-md" className="text-gray-base">
+                  {company.description}
+                </Text>
+                {company.nomeEmpresa && (
+                  <Text variant="body-sm" className="text-gray-base">
+                    Empresa parceira: {company.nomeEmpresa}
+                  </Text>
+                )}
+              </Card>
+            ))}
+          </div>
+        )}
       </Section>
     </>
   );
