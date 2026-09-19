@@ -9,12 +9,7 @@ export const projectCategorySchema = z.enum([
 export type ProjectCategoryValue = z.infer<typeof projectCategorySchema>;
 
 const MAX_IMAGE_SIZE = 5 * 1024 * 1024;
-const ALLOWED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
-  "image/gif",
-];
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
 export const imageFileSchema = z
   .custom<File>((val) => val instanceof File, {
@@ -23,12 +18,16 @@ export const imageFileSchema = z
   .refine((f) => f.size <= MAX_IMAGE_SIZE, "A imagem deve ter no máximo 5MB.")
   .refine(
     (f) => ALLOWED_IMAGE_TYPES.includes(f.type),
-    "Formato não permitido. Use JPEG, PNG, WEBP ou GIF.",
+    "Formato não permitido. Use JPEG, PNG ou WEBP.",
   );
 
 export const workDoneFormSchema = z.object({
   title: z.string().min(2, "Informe um título com ao menos 2 caracteres."),
-  category: z.enum(["inovação", "extensão", "pesquisa"]),
+  category: z
+    .enum(["", "inovação", "extensão", "pesquisa"])
+    .refine((value) => value !== "", {
+      message: "Selecione uma categoria.",
+    }),
   description: z
     .string()
     .min(10, "A descrição deve ter ao menos 10 caracteres."),
@@ -48,6 +47,7 @@ export const projectFormSchema = z.object({
 
 export type WorkDoneFormValues = z.infer<typeof workDoneFormSchema>;
 export type ProjectFormValues = z.infer<typeof projectFormSchema>;
+export type ProjectFormInput = z.input<typeof projectFormSchema>;
 
 export const workDoneSchema = z.object({
   id: z.string(),

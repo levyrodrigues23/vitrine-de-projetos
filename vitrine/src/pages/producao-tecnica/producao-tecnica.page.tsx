@@ -2,6 +2,7 @@ import PageHero from "../../components/layout/page-hero/page-hero";
 import { Card, Section, Text } from "../../components/ui";
 import Technical from "../../assets/icons/productions.svg";
 import { ProjectCard } from "../../components/features";
+import { useProducaoTecnica } from "../../hooks/producao-tecnica";
 import { useSeo } from "../../hooks/seo";
 
 export function ProducaoTecnicaPage() {
@@ -11,33 +12,7 @@ useSeo({
     "Softwares, aplicativos e demais produções técnicas desenvolvidas no Campus UFC Itapajé.",
 });
 
-const artifacts = [
-  {
-    title: "Sistema de monitoramento",
-    description:
-      "Ferramenta criada em projeto integrador para acompanhamento de indicadores.",
-    category: "Software",
-    imageUrl:
-      "https://images.unsplash.com/photo-1558449028-b53a39d100fc?q=80&w=1000&auto=format&fit=crop",
-    area: "Engenharia de Computação",
-  },
-  {
-    title: "Aplicativo de apoio comunitário",
-    description: "Aplicativo desenvolvido em disciplina de extensão digital.",
-    category: "Mobile",
-    imageUrl:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=1000&auto=format&fit=crop",
-    area: "Sistemas de Informação",
-  },
-  {
-    title: "Repositório de modelos",
-    description: "Coleção de templates para apoiar novas turmas e projetos.",
-    category: "Recursos",
-    imageUrl:
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop",
-    area: "Engenharia de Software",
-  },
-];
+const { items: artifacts, loading, error } = useProducaoTecnica();
 
   const valores = [
     {
@@ -125,18 +100,28 @@ const artifacts = [
         showSeparator={false}
         align="center"
       >
-        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {artifacts.map((artifact) => (
-            <ProjectCard
-              key={artifact.title}
-              title={artifact.title}
-              description={artifact.description}
-              category={artifact.category}
-              imageUrl={artifact.imageUrl}
-              area={artifact.area}
-            />
-          ))}
-        </div>
+        {loading ? (
+          <p className="text-center text-gray-base">Carregando artefatos...</p>
+        ) : error ? (
+          <p className="text-center text-red-500">{error}</p>
+        ) : artifacts.length === 0 ? (
+          <p className="text-center text-gray-base">
+            Nenhum artefato registrado no momento.
+          </p>
+        ) : (
+          <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {artifacts.map((artifact) => (
+              <ProjectCard
+                key={artifact.id}
+                title={artifact.title}
+                description={artifact.description}
+                category={artifact.category}
+                imageUrl={artifact.imageUrl}
+                area={artifact.area}
+              />
+            ))}
+          </div>
+        )}
       </Section>
     </>
   );

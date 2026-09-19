@@ -52,7 +52,7 @@ export function LoginPage() {
       });
       navigate("/gerenciador");
     } else {
-      setAuthError("Credenciais inválidas. Tente admin@ufc.br ou gerenciador@ufc.br com a senha 123456.");
+      setAuthError("Credenciais inválidas.");
     }
   };
 

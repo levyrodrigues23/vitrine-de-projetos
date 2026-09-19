@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Controller, useFieldArray, useForm, useWatch } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
 
 import {
   projectFormSchema,
+  type ProjectFormInput,
   type ProjectFormValues,
 } from "../../schemas/project.schema";
 import { useCreateProject } from "../../hooks/project/useCreateProject";
@@ -33,7 +34,7 @@ const CATEGORY_MAP: Record<
   pesquisa: "Pesquisa",
 };
 
-const DEFAULT_VALUES: ProjectFormValues = {
+const DEFAULT_VALUES: ProjectFormInput = {
   category: "inovação",
   title: "",
   responsible: "",
@@ -43,7 +44,7 @@ const DEFAULT_VALUES: ProjectFormValues = {
 };
 
 type MainImageFieldProps = {
-  field: ControllerRenderProps<ProjectFormValues, "imageFile">;
+  field: ControllerRenderProps<ProjectFormInput, "imageFile">;
   error?: string;
 };
 
@@ -64,7 +65,7 @@ function MainImageField({ field, error }: MainImageFieldProps) {
     <FormField label="Imagem de destaque" error={error}>
       <input
         type="file"
-        accept="image/jpeg,image/png,image/webp,image/gif"
+        accept="image/jpeg,image/png,image/webp"
         className="block w-full text-sm text-gray-base-dark file:mr-4 file:rounded-lg file:border-0 file:bg-blue/10 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-dark hover:file:bg-blue/20"
         onChange={(e) => field.onChange(e.target.files?.[0])}
       />
@@ -89,7 +90,7 @@ export function AdicionarProjetoPage() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<ProjectFormValues>({
+  } = useForm<ProjectFormInput, unknown, ProjectFormValues>({
     resolver: zodResolver(projectFormSchema),
     defaultValues: DEFAULT_VALUES,
   });
@@ -103,21 +104,29 @@ export function AdicionarProjetoPage() {
     setSubmitError(null);
     setSubmitted(false);
 
-    const worksDone: WorkDone[] = await Promise.all(
-      values.worksDone.map(async (item) => {
-        let imageUrl = "";
-        if (item.imageFile instanceof File) {
-          imageUrl = await uploadProjectImage(item.imageFile);
-        }
-        return {
-          id: crypto.randomUUID(),
-          title: item.title,
-          category: CATEGORY_MAP[item.category],
-          description: item.description,
-          imageUrl,
-        };
-      }),
-    );
+    let worksDone: WorkDone[];
+    try {
+      worksDone = await Promise.all(
+        values.worksDone.map(async (item) => {
+          let imageUrl = "";
+          if (item.imageFile instanceof File) {
+            imageUrl = await uploadProjectImage(item.imageFile);
+          }
+          return {
+            id: crypto.randomUUID(),
+            title: item.title,
+            category: CATEGORY_MAP[item.category],
+            description: item.description,
+            imageUrl,
+          };
+        }),
+      );
+    } catch {
+      setSubmitError(
+        "Erro ao enviar a imagem de um trabalho realizado. Tente novamente.",
+      );
+      return;
+    }
 
     const payload = {
       title: values.title,

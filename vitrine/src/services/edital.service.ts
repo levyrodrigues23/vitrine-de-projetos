@@ -2,6 +2,10 @@ import { AxiosError } from "axios";
 import { api } from "./api";
 import type { Edital } from "../types/edital.types";
 
+// TODO(#33): there is no Editais/Notices feature in backend/VitrineAPI/VitrineAPI/Features
+// yet (only Projects, Teachers, WorksDone and Upload exist). Every call below hits an
+// endpoint that doesn't exist on the real API - pending backend gap, not a fix.
+
 export type CreateEditalPayload = Omit<Edital, "id">;
 
 export async function listEditais(): Promise<Edital[]> {

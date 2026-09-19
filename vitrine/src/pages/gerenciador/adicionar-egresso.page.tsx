@@ -15,6 +15,15 @@ import {
   Input,
   InputCheckbox,
 } from "../../components/ui";
+import { formatLabel } from "../../utils/label-utils";
+
+const CURSO_OPTIONS = ["sistemas", "software", "redes", "outro"] as const;
+const STATUS_OPTIONS = [
+  "ativo",
+  "empreendendo",
+  "pesquisando",
+  "transicao",
+] as const;
 
 const egressoSchema = z.object({
   fullName: z.string().min(3, "Informe o nome completo."),
@@ -148,10 +157,11 @@ export function AdicionarEgressoPage() {
                       : ""
                   }
                 >
-                  <option value="sistemas">Sistemas de Informação</option>
-                  <option value="software">Engenharia de Software</option>
-                  <option value="redes">Redes de Computadores</option>
-                  <option value="outro">Outro</option>
+                  {CURSO_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {formatLabel(option)}
+                    </option>
+                  ))}
                 </FormSelect>
               </FormField>
               <FormField
@@ -167,10 +177,11 @@ export function AdicionarEgressoPage() {
                       : ""
                   }
                 >
-                  <option value="ativo">Ativo no mercado</option>
-                  <option value="empreendendo">Empreendendo</option>
-                  <option value="pesquisando">Em pesquisa</option>
-                  <option value="transicao">Em transição</option>
+                  {STATUS_OPTIONS.map((option) => (
+                    <option key={option} value={option}>
+                      {formatLabel(option)}
+                    </option>
+                  ))}
                 </FormSelect>
               </FormField>
             </div>
@@ -301,7 +312,7 @@ export function AdicionarEgressoPage() {
                   Curso
                 </p>
                 <p className="mt-2 text-sm font-semibold text-black">
-                  {submitted.course}
+                  {formatLabel(submitted.course)}
                 </p>
               </div>
               <div>
@@ -309,7 +320,7 @@ export function AdicionarEgressoPage() {
                   Área
                 </p>
                 <p className="mt-2 text-sm font-semibold text-black">
-                  {submitted.area}
+                  {formatLabel(submitted.area)}
                 </p>
               </div>
               <div>

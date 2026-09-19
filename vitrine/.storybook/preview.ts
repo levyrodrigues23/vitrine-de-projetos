@@ -1,8 +1,22 @@
 import type { Preview } from '@storybook/react-vite'
+import { createElement } from 'react';
+import { MemoryRouter } from 'react-router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import '../src/index.css';
 
-
 const preview: Preview = {
+  decorators: [
+    (Story) =>
+      createElement(
+        MemoryRouter,
+        null,
+        createElement(
+          QueryClientProvider,
+          { client: new QueryClient() },
+          createElement(Story),
+        ),
+      ),
+  ],
   parameters: {
     controls: {
       matchers: {

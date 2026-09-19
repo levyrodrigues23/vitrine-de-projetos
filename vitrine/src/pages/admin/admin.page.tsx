@@ -16,10 +16,9 @@ const quickLinks = [
   },
   {
     title: "Gerenciar usuários",
-    description: "Controle acessos e permissões das contas internas.",
-    to: "#",
-    cta: "Em breve",
-    disabled: true,
+    description: "Veja os gerenciadores e o que cada um cadastrou.",
+    to: "/admin/usuarios",
+    cta: "Abrir",
     icon: "👥",
   },
   {
@@ -36,7 +35,7 @@ export function AdminPage() {
   useSeo({ title: "Administração", noIndex: true });
 
   const user = useAuthStore((state) => state.user);
-  const { projects, loading } = useProjects();
+  const { projects, loading, error } = useProjects();
 
   const stats = [
     {
@@ -123,6 +122,10 @@ export function AdminPage() {
         </Text>
         {loading ? (
           <Text variant="body-sm">Carregando projetos...</Text>
+        ) : error ? (
+          <Text variant="body-sm" className="text-red">
+            {error}
+          </Text>
         ) : projects.length === 0 ? (
           <Text variant="body-sm" className="text-gray-500">
             Nenhum projeto cadastrado.

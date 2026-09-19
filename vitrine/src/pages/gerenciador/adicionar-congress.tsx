@@ -1,7 +1,4 @@
-// eu provavelmente terei que relacionar artigos para cada congresso, então preciso pensar na melhor forma de fazer isso. 
-
-
-
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -40,7 +37,8 @@ const defaultValues: CongressFormValues = {
 
 export function AdicionarCongressoPage() {
   const {execute, loading} = useCreateCongress();
-
+  const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -51,8 +49,9 @@ export function AdicionarCongressoPage() {
     defaultValues,
   });
 
-  const onSubmit = (values:CongressFormValues) => {
-
+  const onSubmit = async (values: CongressFormValues) => {
+    setSubmitError(null);
+    setSubmitted(false);
 
     const congress: CreateCongress = {
       title: values.title,
@@ -63,7 +62,14 @@ export function AdicionarCongressoPage() {
       tipo: values.tipo,
     };
 
-    execute(congress);
+    const result = await execute(congress);
+
+    if (!result.success) {
+      setSubmitError(result.error ?? "Erro ao salvar o congresso.");
+      return;
+    }
+
+    setSubmitted(true);
   }
 
   return (
@@ -72,6 +78,18 @@ export function AdicionarCongressoPage() {
           subtitle="Cadastro de congressos e simpósios com informações do evento."
       >
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+              {submitError && (
+                <div className="rounded-2xl border border-red/20 bg-red/5 p-4 text-sm text-red">
+                  {submitError}
+                </div>
+              )}
+
+              {submitted && (
+                <div className="rounded-2xl border border-green-base/30 bg-green-base/5 p-4 text-sm text-green-base-dark font-medium">
+                  Congresso publicado com sucesso!
+                </div>
+              )}
+
               <FormSectionCard
                   title="Dados do evento"
                   description="Informações principais do congresso."

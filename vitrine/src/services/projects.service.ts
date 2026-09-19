@@ -1,6 +1,7 @@
 import { AxiosError } from "axios";
 import { api } from "./api";
 import type { Project } from "../types/project.types";
+import type { WorkDone } from "../types/workDone.types";
 
 export type CreateProjectPayload = Omit<Project, "id">;
 
@@ -9,10 +10,20 @@ export async function listProjects(): Promise<Project[]> {
   return response.data;
 }
 
+// Backend's ProjectsResponse (Features/Projects/Shared/ProjectResponse.cs) never includes
+// work items, so a project's worksDone has to be fetched separately and merged in here.
+async function getProjectWorksDone(projectId: string): Promise<WorkDone[]> {
+  const response = await api.get<WorkDone[]>(
+    `/projects/${projectId}/worksdone`,
+  );
+  return response.data;
+}
+
 export async function getProjectById(id: string): Promise<Project | null> {
   try {
     const response = await api.get<Project>(`/projects/${id}`);
-    return response.data;
+    const worksDone = await getProjectWorksDone(id);
+    return { ...response.data, worksDone };
   } catch (error) {
     if (error instanceof AxiosError && error.response?.status === 404) {
       return null;
@@ -26,7 +37,7 @@ export async function uploadProjectImage(file: File): Promise<string> {
   formData.append("file", file);
 
   const response = await api.post<{ url: string }>(
-    "/uploads/projects-image",
+    "/upload/projects/image",
     formData,
   );
 

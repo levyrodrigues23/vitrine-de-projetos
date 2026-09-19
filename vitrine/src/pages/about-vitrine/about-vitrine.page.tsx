@@ -23,12 +23,13 @@ const equipe: TeamMember[] = [
     name: "Kauã Rossi",
     role: "Backend",
     avatarUrl: "https://avatars.githubusercontent.com/u/81786058?v=4",
-    githubUrl: "https://github.com/KauaRoss",
+    githubUrl: "https://github.com/Kaua-Rossi",
   },
   {
     name: "Pablo Caio",
     role: "Backend",
     avatarUrl: "https://avatars.githubusercontent.com/u/175988310?v=4",
+    githubUrl: "https://github.com/PabloCaioSantos",
   },
   {
     name: "Suellen Cândido",

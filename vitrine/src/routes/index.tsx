@@ -3,12 +3,14 @@ import { createBrowserRouter } from "react-router";
 import { HomePage } from "../pages/home/home.page";
 import { AboutVitrinePage } from "../pages/about-vitrine/about-vitrine.page";
 import { AdminPage } from "../pages/admin/admin.page";
+import { GerenciarUsuariosPage } from "../pages/admin/gerenciar-usuarios.page";
 import { AgendaPage } from "../pages/agenda/agenda.page";
 import { EmpreendedorismoPage } from "../pages/empreendedorismo/empreendedorismo.page";
 import { LoginPage } from "../pages/login/login.page";
 import { MinicursosPage } from "../pages/minicursos/minicursos.page";
 import { NotFoundPage } from "../pages/notfound/not-found.page";
 import { AdicionarArtigoPage } from "../pages/gerenciador/adicionar-artigo.page";
+import { AdicionarCongressoPage } from "../pages/gerenciador/adicionar-congress";
 import { AdicionarEgressoPage } from "../pages/gerenciador/adicionar-egresso.page";
 import { AdicionarProjetoPage } from "../pages/gerenciador/adicionar-projeto.page";
 import { AdicionarStartupPage } from "../pages/gerenciador/adicionar-startup.page";
@@ -131,6 +133,10 @@ export const router = createBrowserRouter([
             index: true,
             element: <AdminPage />,
           },
+          {
+            path: "usuarios",
+            element: <GerenciarUsuariosPage />,
+          },
         ],
       },
       {
@@ -168,6 +174,10 @@ export const router = createBrowserRouter([
           {
             path: "professores",
             element: <AdicionarProfessorPage />,
+          },
+          {
+            path: "congressos",
+            element: <AdicionarCongressoPage />,
           }
         ],
       },

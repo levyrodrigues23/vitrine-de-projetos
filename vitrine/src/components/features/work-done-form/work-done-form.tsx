@@ -4,13 +4,13 @@ import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { ArrowDown, ArrowUp, Trash2 } from "lucide-react";
 
 import { Button, FormField, FormTextarea, Input, FormSelect } from "../../ui";
-import type { ProjectFormValues } from "../../../schemas/project.schema";
+import type { ProjectFormInput } from "../../../schemas/project.schema";
 
 type WorkDoneFormProps = {
   index: number;
-  control: Control<ProjectFormValues>;
-  register: UseFormRegister<ProjectFormValues>;
-  errors: FieldErrors<ProjectFormValues>;
+  control: Control<ProjectFormInput>;
+  register: UseFormRegister<ProjectFormInput>;
+  errors: FieldErrors<ProjectFormInput>;
   onRemove: () => void;
   onMoveUp: () => void;
   onMoveDown: () => void;
@@ -152,7 +152,7 @@ export function WorkDoneForm({
           >
             <input
               type="file"
-              accept="image/jpeg,image/png,image/webp,image/gif"
+              accept="image/jpeg,image/png,image/webp"
               className="block w-full text-sm text-gray-base-dark file:mr-4 file:rounded-lg file:border-0 file:bg-blue/10 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-dark hover:file:bg-blue/20"
               onChange={(e) => field.onChange(e.target.files?.[0])}
             />
