@@ -11,6 +11,7 @@ using VitrineAPI.Features.Congresses.Endpoints;
 using VitrineAPI.Features.Papers.Endpoints;
 using VitrineAPI.Features.JrCompanyProjects.Endpoints;
 using VitrineAPI.Features.Editais.Endpoints;
+using VitrineAPI.Features.Graduates.Endpoints;
 
 namespace VitrineAPI
 {
@@ -111,6 +112,13 @@ namespace VitrineAPI
             builder.Services.AddScoped<GetEditaisHandler>();
             builder.Services.AddScoped<UpdateEditalHandler>();
             builder.Services.AddScoped<DeleteEditalHandler>();
+
+            // Graduates handlers
+            builder.Services.AddScoped<CreateGraduateHandler>();
+            builder.Services.AddScoped<GetGraduateByIdHandler>();
+            builder.Services.AddScoped<GetGraduatesHandler>();
+            builder.Services.AddScoped<UpdateGraduateHandler>();
+            builder.Services.AddScoped<DeleteGraduateHandler>();
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 

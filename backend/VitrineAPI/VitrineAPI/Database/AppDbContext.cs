@@ -18,5 +18,6 @@ namespace VitrineAPI.Database
         public DbSet<Paper> Papers { get; set; } = null!;
         public DbSet<JrCompanyProject> JrCompanyProjects { get; set; } = null!;
         public DbSet<Edital> Editais { get; set; } = null!; // Edital é a única entidade que não segue convenção em inglês por não haver uma tradução muito boa para o termo. A tradução literal seria "Public Notice", o que não sabemos se seria ideal.
+        public DbSet<Graduate> Graduates { get; set; } = null!;
     }
 }

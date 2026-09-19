@@ -85,6 +85,36 @@ namespace VitrineAPI.Migrations
                     b.ToTable("Editais");
                 });
 
+            modelBuilder.Entity("VitrineAPI.Database.Models.Graduate", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Contact")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Course")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("GraduationYear")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Graduates");
+                });
+
             modelBuilder.Entity("VitrineAPI.Database.Models.JrCompanyProject", b =>
                 {
                     b.Property<Guid>("Id")
