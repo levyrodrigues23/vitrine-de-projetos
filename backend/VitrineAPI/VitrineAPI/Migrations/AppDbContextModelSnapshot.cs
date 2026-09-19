@@ -56,6 +56,35 @@ namespace VitrineAPI.Migrations
                     b.ToTable("Congresses");
                 });
 
+            modelBuilder.Entity("VitrineAPI.Database.Models.Edital", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Editais");
+                });
+
             modelBuilder.Entity("VitrineAPI.Database.Models.JrCompanyProject", b =>
                 {
                     b.Property<Guid>("Id")

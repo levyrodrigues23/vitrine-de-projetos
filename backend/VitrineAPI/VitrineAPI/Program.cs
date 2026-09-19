@@ -10,6 +10,7 @@ using VitrineAPI.Features.Startups.Endpoints;
 using VitrineAPI.Features.Congresses.Endpoints;
 using VitrineAPI.Features.Papers.Endpoints;
 using VitrineAPI.Features.JrCompanyProjects.Endpoints;
+using VitrineAPI.Features.Editais.Endpoints;
 
 namespace VitrineAPI
 {
@@ -103,6 +104,13 @@ namespace VitrineAPI
             builder.Services.AddScoped<GetJrCompanyProjectsHandler>();
             builder.Services.AddScoped<UpdateJrCompanyProjectHandler>();
             builder.Services.AddScoped<DeleteJrCompanyProjectHandler>();
+
+            // Editais handlers
+            builder.Services.AddScoped<CreateEditalHandler>();
+            builder.Services.AddScoped<GetEditalByIdHandler>();
+            builder.Services.AddScoped<GetEditaisHandler>();
+            builder.Services.AddScoped<UpdateEditalHandler>();
+            builder.Services.AddScoped<DeleteEditalHandler>();
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 
