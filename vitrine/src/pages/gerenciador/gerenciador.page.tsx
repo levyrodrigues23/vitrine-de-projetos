@@ -52,6 +52,14 @@ const actions = [
     icon: "👨‍🏫",
     color: "bg-white border-gray-200 hover:border-gray-300",
     badge: "from-purple-base/20 to-purple-base/5",
+  },
+  {
+    title: "Congresso",
+    description: "Congressos e simpósios científicos.",
+    to: "/gerenciador/congressos",
+    icon: "🎤",
+    color: "bg-white border-gray-200 hover:border-gray-300",
+    badge: "from-teal-500/20 to-teal-500/5",
   }
 ];
 
