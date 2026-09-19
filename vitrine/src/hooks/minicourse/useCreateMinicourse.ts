@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   createMinicourse,
-  uploadMinicourseImage,
   type CreateMinicoursePayload,
 } from "../../services/minicourse.service";
 import { queryKeys } from "../../services/query-keys";
@@ -15,24 +14,7 @@ export function useCreateMinicourse() {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
-    mutationFn: async ({
-      payload,
-      imageFile,
-    }: {
-      payload: CreateMinicoursePayload;
-      imageFile?: File;
-    }) => {
-      let imageUrl: string | undefined;
-
-      if (imageFile) {
-        imageUrl = await uploadMinicourseImage(imageFile);
-      }
-
-      return createMinicourse({
-        ...payload,
-        ...(imageUrl && { imageUrl }),
-      });
-    },
+    mutationFn: (payload: CreateMinicoursePayload) => createMinicourse(payload),
     onSuccess: async (minicourse) => {
       await queryClient.invalidateQueries({ queryKey: queryKeys.minicourses });
       queryClient.setQueryData(
@@ -44,10 +26,9 @@ export function useCreateMinicourse() {
 
   const execute = async (
     payload: CreateMinicoursePayload,
-    imageFile?: File,
   ): Promise<CreateMinicourseResult> => {
     try {
-      const data = await mutation.mutateAsync({ payload, imageFile });
+      const data = await mutation.mutateAsync(payload);
       return { success: true, data };
     } catch (err) {
       const errorMessage =

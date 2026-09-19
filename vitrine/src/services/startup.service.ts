@@ -2,12 +2,6 @@ import { api } from "./api";
 import type { Startup } from "../types/startup.types";
 import { AxiosError } from "axios";
 
-// TODO(#33): there is no Startups feature in backend/VitrineAPI/VitrineAPI/Features yet
-// (only Projects, Teachers, WorksDone and Upload exist). Every call below hits an endpoint
-// that doesn't exist on the real API. Paths are standardized to the same lower-case,
-// plural convention used by projects.service.ts/teachers.service.ts so this is ready to
-// wire up once the backend feature lands - this is a pending backend gap, not a fix.
-
 export type CreateStartupPayload = Omit<Startup, "id">;
 
 export async function listStartups(): Promise<Startup[]> {
