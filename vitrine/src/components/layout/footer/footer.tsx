@@ -83,7 +83,7 @@ export function Footer() {
                             <li>
                                 <a
                                     className={linkClass}
-                                    href="https://www.ufc.br/protecao-de-dados"
+                                    href="https://lgpd.ufc.br"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -93,7 +93,7 @@ export function Footer() {
                             <li>
                                 <a
                                     className={linkClass}
-                                    href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/atendimento-governo-unico"
+                                    href="https://www.gov.br/governodigital/pt-br/acessibilidade-e-usuario/acessibilidade-digital"
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
