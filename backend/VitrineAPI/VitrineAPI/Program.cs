@@ -2,9 +2,14 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 using VitrineAPI.Database;
+using VitrineAPI.Features.MiniCourses.Endpoints;
 using VitrineAPI.Features.Projects.Endpoints;
 using VitrineAPI.Features.Teachers.Endpoints;
 using VitrineAPI.Features.WorksDone.Endpoints;
+using VitrineAPI.Features.Startups.Endpoints;
+using VitrineAPI.Features.Congresses.Endpoints;
+using VitrineAPI.Features.Papers.Endpoints;
+using VitrineAPI.Features.JrCompanyProjects.Endpoints;
 
 namespace VitrineAPI
 {
@@ -45,8 +50,8 @@ namespace VitrineAPI
             
             // Projects handlers
             builder.Services.AddScoped<CreateProjectHandler>();
-            builder.Services.AddScoped<GetProjectsHandler>();
             builder.Services.AddScoped<GetProjectByIdHandler>();
+            builder.Services.AddScoped<GetProjectsHandler>();
             builder.Services.AddScoped<UpdateProjectHandler>();
             builder.Services.AddScoped<DeleteProjectHandler>();
 
@@ -57,13 +62,47 @@ namespace VitrineAPI
             builder.Services.AddScoped<UpdateWorkDoneHandler>();
             builder.Services.AddScoped<DeleteWorkDoneHandler>();
             
-
             // Teachers handlers
             builder.Services.AddScoped<CreateTeacherHandler>();
-            builder.Services.AddScoped<GetTeachersHandler>();
             builder.Services.AddScoped<GetTeacherByIdHandler>();
+            builder.Services.AddScoped<GetTeachersHandler>();
             builder.Services.AddScoped<UpdateTeacherHandler>();
             builder.Services.AddScoped<DeleteTeacherHandler>();
+
+            // MiniCourses handlers
+            builder.Services.AddScoped<CreateMiniCourseHandler>();
+            builder.Services.AddScoped<GetMiniCourseByIdHandler>();
+            builder.Services.AddScoped<GetMiniCoursesHandler>();
+            builder.Services.AddScoped<UpdateMiniCourseHandler>();
+            builder.Services.AddScoped<DeleteMiniCourseHandler>();
+
+            // Startups handlers
+            builder.Services.AddScoped<CreateStartupHandler>();
+            builder.Services.AddScoped<GetStartupByIdHandler>();
+            builder.Services.AddScoped<GetStartupsHandler>();
+            builder.Services.AddScoped<UpdateStartupHandler>();
+            builder.Services.AddScoped<DeleteStartupHandler>();
+
+            // Congresses handlers
+            builder.Services.AddScoped<CreateCongressHandler>();
+            builder.Services.AddScoped<GetCongressByIdHandler>();
+            builder.Services.AddScoped<GetCongressesHandler>();
+            builder.Services.AddScoped<UpdateCongressHandler>();
+            builder.Services.AddScoped<DeleteCongressHandler>();
+
+            // Papers handlers
+            builder.Services.AddScoped<CreatePaperHandler>();
+            builder.Services.AddScoped<GetPaperByIdHandler>();
+            builder.Services.AddScoped<GetPapersHandler>();
+            builder.Services.AddScoped<UpdatePaperHandler>();
+            builder.Services.AddScoped<DeletePaperHandler>();
+
+            // JrCompanyProjects handlers
+            builder.Services.AddScoped<CreateJrCompanyProjectHandler>();
+            builder.Services.AddScoped<GetJrCompanyProjectByIdHandler>();
+            builder.Services.AddScoped<GetJrCompanyProjectsHandler>();
+            builder.Services.AddScoped<UpdateJrCompanyProjectHandler>();
+            builder.Services.AddScoped<DeleteJrCompanyProjectHandler>();
 
             builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 

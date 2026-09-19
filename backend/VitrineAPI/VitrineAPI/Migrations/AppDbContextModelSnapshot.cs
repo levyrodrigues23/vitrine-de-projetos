@@ -22,6 +22,140 @@ namespace VitrineAPI.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("VitrineAPI.Database.Models.Congress", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Congresses");
+                });
+
+            modelBuilder.Entity("VitrineAPI.Database.Models.JrCompanyProject", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("CompanyName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Contact")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("JrCompanyProjects");
+                });
+
+            modelBuilder.Entity("VitrineAPI.Database.Models.MiniCourse", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Organizers")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("TargetAudience")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MiniCourses");
+                });
+
+            modelBuilder.Entity("VitrineAPI.Database.Models.Paper", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Authors")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Base")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("CongressId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Keywords")
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("YearOfPublication")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CongressId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("Papers");
+                });
+
             modelBuilder.Entity("VitrineAPI.Database.Models.Project", b =>
                 {
                     b.Property<Guid>("Id")
@@ -51,6 +185,37 @@ namespace VitrineAPI.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("Projects");
+                });
+
+            modelBuilder.Entity("VitrineAPI.Database.Models.Startup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Contact")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Startups");
                 });
 
             modelBuilder.Entity("VitrineAPI.Database.Models.Teacher", b =>
@@ -126,6 +291,25 @@ namespace VitrineAPI.Migrations
                     b.HasIndex("TeacherId");
 
                     b.ToTable("WorksDone");
+                });
+
+            modelBuilder.Entity("VitrineAPI.Database.Models.Paper", b =>
+                {
+                    b.HasOne("VitrineAPI.Database.Models.Congress", "Congress")
+                        .WithMany()
+                        .HasForeignKey("CongressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VitrineAPI.Database.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Congress");
+
+                    b.Navigation("Teacher");
                 });
 
             modelBuilder.Entity("VitrineAPI.Database.Models.Project", b =>

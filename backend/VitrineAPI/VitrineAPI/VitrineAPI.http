@@ -2,6 +2,203 @@
 @projectId = 00000000-0000-0000-0000-000000000000
 @workDoneId = 00000000-0000-0000-0000-000000000000
 @teacherId = 3c9e9ecc-fff4-4757-a8fb-d3d57dc7be1b
+@miniCourseId = 02f9048f-3d68-4a1e-aeee-5a4875bb0fc3
+@startupId = e9d96353-f35d-404d-b2b9-093db8b7bc98
+@congressId = 7563445a-6c1b-494b-bd83-40cb932eda82
+
+### Cria um Congresso
+POST {{baseUrl}}/api/congresses
+Content-Type: application/json
+
+{
+  "title": "Congresso Brasileiro de Inovação Tecnológica 2",
+  "description": "Evento anual reunindo pesquisadores e empresas do setor de tecnologia.",
+  "date": "2026-10-15",
+  "url": "https://congressoinovacao.com.br",
+  "location": "Fortaleza, CE",
+  "status": "A_ser_publicado"
+}
+
+### Pegando congresso por id (deve retornar 200 OK se congressId válido)
+GET {{baseUrl}}/api/congresses/{{congressId}}
+Accept: application/json
+
+### Listando todos os congressos (deve retornar 200 OK)
+GET {{baseUrl}}/api/congresses
+Accept: application/json
+
+### Atualizando um congresso (deve retornar 200 OK se congressId válido)
+PUT {{baseUrl}}/api/congresses/{{congressId}}
+Content-Type: application/json
+
+{
+  "title": "Congresso Brasileiro de Inovação Tecnológica 2026",
+  "description": "Evento anual reunindo pesquisadores, startups e empresas do setor de tecnologia.",
+  "date": "2026-10-20",
+  "url": "https://congressoinovacao.com.br",
+  "location": "Fortaleza, CE",
+  "status": "Em_andamento"
+}
+
+### Deletando um congresso (deve retornar 204 No Content se congressId válido)
+DELETE {{baseUrl}}/api/congresses/{{congressId}}
+
+### Criando congresso com status inválido (deve retornar 400 Bad Request)
+POST {{baseUrl}}/api/congresses
+Content-Type: application/json
+
+{
+  "title": "Congresso Teste",
+  "description": "Teste de validação",
+  "date": "2026-10-15",
+  "url": "https://teste.com.br",
+  "location": "Fortaleza, CE",
+  "status": "Cancelado"
+}
+
+### Criando congresso com campos vazios (deve retornar 400 Bad Request)
+POST {{baseUrl}}/api/congresses
+Content-Type: application/json
+
+{
+  "title": "",
+  "description": "",
+  "date": "",
+  "url": "",
+  "location": "",
+  "status": ""
+}
+
+### Pegando congresso por id inexistente (deve retornar 404 Not Found)
+GET {{baseUrl}}/api/congresses/00000000-0000-0000-0000-000000000000
+Accept: application/json
+
+### Deletando congresso inexistente (deve retornar 404 Not Found)
+DELETE {{baseUrl}}/api/congresses/00000000-0000-0000-0000-000000000000
+
+### Cria uma Startup
+POST {{baseUrl}}/api/startups
+Content-Type: application/json
+
+{
+  "title": "EcoTech Solutions",
+  "description": "Startup focada em soluções sustentáveis para reciclagem industrial.",
+  "imageUrl": "https://example.com/images/ecotech.png",
+  "category": "Sustentabilidade",
+  "contact": "contato@ecotech.com"
+}
+
+### Pegando startup por id (deve retornar 200 OK se startupId válido)
+GET {{baseUrl}}/api/startups/{{startupId}}
+Accept: application/json
+
+### Pegando startup inexistente (deve retornar 404 NotFound)
+GET {{baseUrl}}/api/startups/11111111-1111-1111-1111-111111111111
+Accept: application/json
+
+### Atualizando startup com dados válidos (deve retornar 200 OK)
+PUT {{baseUrl}}/api/startups/{{startupId}}
+Content-Type: application/json
+
+{
+  "title": "EcoTech Solutions 2.0",
+  "description": "Startup focada em soluções sustentáveis para reciclagem industrial e urbana.",
+  "imageUrl": "https://example.com/images/ecotech-v2.png",
+  "category": "Sustentabilidade",
+  "contact": "novo-contato@ecotech.com"
+}
+
+### Atualizando Startup inexistente (deve retornar 404 NotFound)
+PUT {{baseUrl}}/api/startups/11111111-1111-1111-1111-111111111111
+Content-Type: application/json
+
+{
+  "title": "Startup Fantasma",
+  "description": "Essa startup não existe no banco.",
+  "imageUrl": "https://example.com/images/fantasma.png",
+  "category": "Inexistente",
+  "contact": "fantasma@ghost.com"
+}
+
+### Atualizando startup com valor inválido (Deve retornar 400 BadRequest)
+PUT {{baseUrl}}/api/startups/{{startupId}}
+Content-Type: application/json
+
+{
+  "title": "Este é um título extremamente longo que ultrapassa cinquenta caracteres",
+  "description": "Descrição válida dentro do limite.",
+  "imageUrl": "https://example.com/images/invalid.png",
+  "category": "Tecnologia",
+  "contact": "contato@teste.com"
+}
+
+### Pegando todas as startups
+GET {{baseUrl}}/api/startups
+
+### Criando uma startup
+POST {{baseUrl}}/api/startups
+Content-Type: application/json
+{
+  "title": "Startup Teste 2",
+  "description": "Descrição da startup de teste 2",
+  "imageUrl": "https://example.com/image.jpg",
+  "category": "E-commerce",
+  "contact": "https://example.com/contact"
+}
+
+### Atualizando um mini curso
+PUT {{baseUrl}}/api/minicourses/{{miniCourseId}}
+Content-Type: application/json
+{
+  "title": "Inteligência artificial 101 - Atualizado",
+  "description": "um curso atualizado sobre os fundamentos de inteligência artificial",
+  "organizers": "pedro, joão, maria, ana",
+  "targetAudience": "Externo"
+}
+
+### Atualizando um mini curso inexistente (deve retornar 404)
+PUT {{baseUrl}}/api/minicourses/00000000-0000-0000-0000-000000000000
+Content-Type: application/json
+
+{
+  "title": "Curso fantasma",
+  "description": "esse curso não existe",
+  "organizers": "ninguém",
+  "targetAudience": "Interno"
+}
+
+### Atualizando um mini curso com dados inválidos (deve retornar 400)
+PUT {{baseUrl}}/api/minicourses/{{miniCourseId}}
+Content-Type: application/json
+
+{
+  "title": "",
+  "description": "",
+  "organizers": "",
+  "targetAudience": "ValorInvalido"
+}
+
+### Deletando um mini curso
+DELETE {{baseUrl}}/api/minicourses/{{miniCourseId}}
+
+### Deletando um mini curso inexistente (deve retornar 404)
+DELETE {{baseUrl}}/api/minicourses/00000000-0000-0000-0000-000000000000
+
+### Pegando todos os mini cursos
+GET {{baseUrl}}/api/minicourses
+
+### Pegando um mini curso por id
+GET {{baseUrl}}/api/minicourses/{{miniCourseId}}
+
+### Criando um mini curso
+POST {{baseUrl}}/api/minicourses
+Content-Type: application/json
+{
+  "title": "Inteligência artificial 101",
+  "description": "um curso sobre os fundamentos de inteligência artificial",
+  "organizers": "pedro, joão, maria",
+  "targetAudience": "Interno"
+}
 
 ### Deletando um professor
 DELETE {{baseUrl}}/api/teachers/{{teacherId}}
