@@ -18,7 +18,7 @@ namespace VitrineAPI.Features.Upload.Endpoints
         [HttpPost("{entity}/image")]
         public async Task<IActionResult> Upload(string entity, IFormFile? file)
         {
-            var allowedEntities = new HashSet<string> { "projects", "worksdone", "teachers" };
+            var allowedEntities = new HashSet<string> { "projects", "worksdone", "teachers", "startups", "jr-company-projects" };
             if (!allowedEntities.Contains(entity.ToLower()))
                 return BadRequest(new { error = "Invalid entity." });
 
